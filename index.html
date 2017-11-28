@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <canvas id="gameCanavas" width="800" height="600"></canvas>
+    <canvas id="gameCanavas" width="1280" height="659"></canvas>
     <script>
     var canvas;
     var canvasContext;
@@ -41,8 +41,7 @@
                 var mousePos = mousePosition(evt);
                 paddleUser = mousePos.y - (paddleHeight / 2);
             });
-        can.addEventListener("touchmove",		
-        	function(evt) {
+        can.addEventListener("touchmove",function(evt) {
                 var mousePos = mousePosition(evt);
                 paddleUser = mousePos.y - (paddleHeight / 2);
             });
