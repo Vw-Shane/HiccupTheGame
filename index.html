@@ -41,6 +41,11 @@
                 var mousePos = mousePosition(evt);
                 paddleUser = mousePos.y - (paddleHeight / 2);
             });
+        can.addEventListener("touchmove",		
+        	function(evt) {
+                var mousePos = mousePosition(evt);
+                paddleUser = mousePos.y - (paddleHeight / 2);
+            });
     }
 
     function mousePosition(evt) {
@@ -76,7 +81,7 @@
         ballX = ballX + ballSpeedX;
         ballY = ballY + ballSpeedY;
         //controls left right border
-        if (ballX > 800) {
+        if (ballX > canvas.width -40) {
             if (ballY > paddleSim && ballY < paddleSim + paddleHeight) {
                 ballSpeedX = -ballSpeedX
                 var deltaY = ballY - (paddleSim+paddleHeight/2);
@@ -86,7 +91,7 @@
             }
         };
 
-        if (ballX <= 0) {
+        if (ballX <= 40) {
             if (ballY > paddleUser && ballY < paddleUser + paddleHeight) {
                 ballSpeedX = -ballSpeedX
                 var deltaY = ballY - (paddleUser+paddleHeight/2);
