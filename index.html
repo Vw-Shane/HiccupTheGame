@@ -36,18 +36,58 @@
             drawEverything();
         }, 1000 / framesPerSecond);
 
-        // canvas.addEventListener('mousemove',
-        //     function(evt) {
-        //         var mousePos = mousePosition(evt);
-        //         paddleUser = mousePos.y - (paddleHeight / 2);
-        //     });
-        canvas.addEventListener("touchmove", 	
-        	function(evt) {
+        canvas.addEventListener('mousemove',
+            function(evt) {
                 var mousePos = mousePosition(evt);
                 paddleUser = mousePos.y - (paddleHeight / 2);
-            });
+            });        
     }
-
+var mouseX = -100, mouseY = -100, dragging = false;
+ 
+function setupInput() {
+  document.addEventListener('mousemove', mousePosUpdate);
+  document.addEventListener('mouseup', mouseUp);
+  document.addEventListener('mousedown', mouseDown);
+  canvas.addEventListener('touchstart', touchDown); // assumes canvas already hooked up
+  canvas.addEventListener('touchend', touchUp);
+  document.body.addEventListener('touchmove', touchMove);
+}
+ 
+function mousePosUpdate(evt) {
+  var rect = canv.getBoundingClientRect();
+  mouseX = Math.floor(evt.clientX - rect.left);
+  mouseY = Math.floor(evt.clientY - rect.top);
+}
+ 
+function mouseDown(evt) {
+  dragging = true;
+  // do other mouse stuff
+}
+function mouseUp(evt) {
+  dragging = false;
+}
+ 
+function touchDown(e) {
+    var touch = e.touches[0];
+    var mouseEvent = new MouseEvent("mousedown", {
+      clientX: touch.clientX,
+      clientY: touch.clientY
+    });
+    mouseX = mouseEvent.clientX;
+    mouseY = mouseEvent.clientY;
+    
+    mouseDown(mouseEvent); // handle it like a mouse click
+    //e.preventDefault(); // solves some issues, introduces others :)
+}
+function touchMove(e) {
+    var touch = e.touches[0];
+    var mouseEvent = new MouseEvent("mousemove", {
+      clientX: touch.clientX,
+      clientY: touch.clientY
+    });
+    mousePosUpdate(mouseEvent); // handle it like mouse move
+    e.preventDefault(); // interrupting drag scroll, not always appropriate
+}
     function mousePosition(evt) {
         var rect = canvas.getBoundingClientRect();
         var root = document.documentElement;
