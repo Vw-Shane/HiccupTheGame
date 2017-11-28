@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <meta charset="utf-8">
+    <title> Tab title here </title>
+    <link rel="stylesheet" type="text/css" href="css/reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+    </script>
+    <script type="text/javascript" src="java/app.js">
+    </script>
+    <link rel="shortcut icon" type="image/png" href=" tab icon here ">
+</head>
+
+<body>
+    <canvas id="gameCanavas" width="800" height="600"></canvas>
+    <script>
+    var canvas;
+    var canvasContext;
+    var ballX = 50;
+    var ballY = 50;
+    var ballSpeedX = 5;
+    var ballSpeedY = 5;
+    var paddleUser = 50;
+    var paddleSim = 50;
+    var paddleHeight = 100;
+    var paddleWidth = 20;
+    window.onload = function() {
+        canvas = document.getElementById('gameCanavas');
+        canvasContext = canvas.getContext('2d');
+        var framesPerSecond = 30;
+        setInterval(function() {
+            moveEverything();
+            drawEverything();
+        }, 1000 / framesPerSecond);
+
+        canvas.addEventListener('mousemove',
+            function(evt) {
+                var mousePos = mousePosition(evt);
+                paddleUser = mousePos.y - (paddleHeight / 2);
+            });
+    }
+
+    function mousePosition(evt) {
+        var rect = canvas.getBoundingClientRect();
+        var root = document.documentElement;
+        var mouseX = evt.clientX - rect.left - root.scrollLeft;
+        var mouseY = evt.clientY - rect.top - root.scrollTop;
+        return {
+            x: mouseX,
+            y: mouseY
+        };
+
+    }
+
+    function ballRest() {
+        ballX = canvas.width / 2;
+        ballY = canvas.height / 2;
+        ballSpeedX = -ballSpeedX;
+        ballSpeedY = -ballSpeedY;
+    }
+
+    function paddleSimMove() {
+        var paddleSimCenter = paddleSim + (paddleHeight / 2);
+        if (paddleSimCenter < ballY-35) {
+            paddleSim += 10;
+        } else if(paddleSimCenter > ballY+35) {
+            paddleSim -= 10;
+        }
+    }
+
+    function moveEverything() {
+        paddleSimMove()
+        ballX = ballX + ballSpeedX;
+        ballY = ballY + ballSpeedY;
+        //controls left right border
+        if (ballX > 800) {
+            if (ballY > paddleSim && ballY < paddleSim + paddleHeight) {
+                ballSpeedX = -ballSpeedX
+                var deltaY = ballY - (paddleSim+paddleHeight/2);
+                ballSpeedY = deltaY * .3;
+            } else {
+                ballRest();
+            }
+        };
+
+        if (ballX <= 0) {
+            if (ballY > paddleUser && ballY < paddleUser + paddleHeight) {
+                ballSpeedX = -ballSpeedX
+                var deltaY = ballY - (paddleUser+paddleHeight/2);
+                ballSpeedY = deltaY * .3;
+            } else {
+                ballRest();
+            }
+        };
+
+        //controls top bottom border
+        if (ballY > canvas.height) {
+            ballSpeedY = -ballSpeedY;
+        } else if (ballY <= 0) {
+            //console.log("Too the left")
+            ballSpeedY = ballSpeedY * -1;
+        };
+    };
+
+    function drawEverything() {
+        colorRect(0, 0, canvas.width, canvas.height, 'black', "Main");
+        colorRect(10, paddleUser, paddleWidth, paddleHeight, 'white', "userPaddle");
+
+        colorRect(canvas.width - paddleWidth - 10, paddleSim, paddleWidth, paddleHeight, 'red', "Computer Paddle");
+        colorCircle(ballX, ballY, 10, 'blue', "ball");
+
+    }
+
+    function colorCircle(centerX, centerY, radius, drawColor, tag) {
+        canvasContext.fillStyle = drawColor;
+        canvasContext.beginPath();
+        canvasContext.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
+        canvasContext.fill();
+
+    }
+
+    function colorRect(leftX, topY, width, height, drawColor, tag) {
+        canvasContext.fillStyle = drawColor;
+        canvasContext.fillRect(leftX, topY, width, height);
+    }
+    </script>
+</body>
+
+</html>
