@@ -6,7 +6,7 @@
     <title> Tab title here </title>
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     </script>
     <script type="text/javascript" src="java/app.js">
@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <canvas id="gameCanavas" width="800" height="600"></canvas>
+    <canvas id="gameCanavas"></canvas>
     <script>
     var canvas;
     var canvasContext;
@@ -149,6 +149,35 @@ function touchMove(e) {
             ballSpeedY = ballSpeedY * -1;
         };
     };
+    //
+    function draw() {
+  var ctx = canvas.getContext('2d');
+    ctx.canvas.width  = window.innerWidth;
+  ctx.canvas.height = window.innerHeight;
+  function drawEverything() {
+        colorRect(0, 0, canvas.width, canvas.height, 'black', "Main");
+        colorRect(10, paddleUser, paddleWidth, paddleHeight, 'white', "userPaddle");
+
+        colorRect(canvas.width - paddleWidth - 10, paddleSim, paddleWidth, paddleHeight, 'red', "Computer Paddle");
+        colorCircle(ballX, ballY, 10, 'blue', "ball");
+
+    }
+
+    function colorCircle(centerX, centerY, radius, drawColor, tag) {
+        canvasContext.fillStyle = drawColor;
+        canvasContext.beginPath();
+        canvasContext.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
+        canvasContext.fill();
+
+    }
+
+    function colorRect(leftX, topY, width, height, drawColor, tag) {
+        canvasContext.fillStyle = drawColor;
+        canvasContext.fillRect(leftX, topY, width, height);
+    }
+}
+
+    
 
     function drawEverything() {
         colorRect(0, 0, canvas.width, canvas.height, 'black', "Main");
