@@ -1,8 +1,10 @@
+// player stats
 var player = {
     postionX: 0,
     postionY: 500
-
 }
+
+
 var keysDown = {};
 
 window.onload = function() {
@@ -27,18 +29,10 @@ function drawEverything() {
 }
 
 function moveEverything() {
-    window.addEventListener('keydown', doKeyDown, true);
-    if (player.postionX < 90 && player.postionY < 140) {
-        setTimeout(gravity2ndRow, 100);
 
-        function gravity2ndRow() {
-            if (player.postionX < 90 && player.postionY < 130) {
-                player.postionY = 308;
-                console.log("Char Should fall dwm");
-                console.log("up,dwn" + player.postionY, "left righht" + player.postionX);
-            } else { clearTimeout(); }
-        };
-    }
+    window.addEventListener('keydown', doKeyDown, true);
+    gravity();
+
 }
 // up,dwn130 left righht80
 function doKeyDown(evt) {
@@ -53,7 +47,7 @@ function doKeyDown(evt) {
         case 40:
             /* Down arrow was pressed */
             console.log("dwn");
-            console.log("up,dwn" + player.postionY, "left righht" + player.postionX);
+            console.log("up,dwn Y" + player.postionY, "left righht X" + player.postionX);
             break;
         case 37:
             /* Left arrow was pressed */
@@ -87,4 +81,35 @@ function colorCircle(centerX, centerY, radius, drawColor, tag) {
     canvasContext.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
     canvasContext.fill();
 
+}
+
+function gravity() {
+
+    if (player.postionX < 90 && player.postionY < 140) {
+        setTimeout(gravity2ndRow, 100);
+    }
+
+    function gravity2ndRow() {
+        if (player.postionX < 90 && player.postionY < 130) {
+            player.postionY = 308;
+            console.log("Char Should fall dwm");
+            console.log("up,dwn" + player.postionY, "left righht" + player.postionX);
+        } else { clearTimeout(); }
+    };
+
+    if (player.postionX > 390 && player.postionX < 550) {
+        if (player.postionY > 140 && player.postionY < 350) {
+
+            setTimeout(gravity1stRow, 100);
+        }
+    };
+
+    function gravity1stRow() {
+
+        if (player.postionX > 390 && player.postionX < 550) {
+            player.postionY = 500;
+            console.log("Char Should fall dwm");
+            console.log("up,dwn" + player.postionY, "left righht" + player.postionX);
+        } else { clearTimeout(); }
+    };
 }
