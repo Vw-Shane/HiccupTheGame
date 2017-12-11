@@ -1,32 +1,41 @@
 // player stats
 var player = {
     postionX: 0,
-    postionY: 500
+    postionY: 525
 }
 
 
+var enimies = {
+
+}
+
 var keysDown = {};
+// Create a new image object
+var image = new Image();
+var imge = new Image();
+
+// Set the image source and start loading
+image.src = 'Frylock.png';
+imge.src = 'Master_Shake.png'
+
 
 window.onload = function() {
+    // preloader();
     console.log(keysDown);
     canvas = document.getElementById('myCanvas');
     canvasContext = canvas.getContext('2d');
+    
     var framesPerSecond = 60;
     setInterval(function() {
         drawEverything();
         moveEverything();
+
+
     }, 1000 / framesPerSecond);
+    $("#statsHere").append(`${player.postionX} is your left or right postion
+        ${player.postionY} is your up down postion`);
 
 };
-//drawing code
-function drawEverything() {
-    colorRect(0, 0, canvas.width, canvas.height, '#C9EEF3', "Main");
-    colorRect(0, canvas.height - 185, canvas.width / 3, canvas.height / 12, "red", "firstRowLeft");
-    colorRect(canvas.width - 650, canvas.height - 185, canvas.width, canvas.height / 12, "red", "firstRowRight");
-    colorRect(90, canvas.height - 395, canvas.width, canvas.height / 12, "green", "secondRow")
-    colorRect(canvas.width - 20, canvas.height - 495, 10, 100, "yellow", "flag")
-    colorRect(player.postionX, player.postionY, 10, 100, "#CE839A", "player")
-}
 
 function moveEverything() {
 
@@ -41,27 +50,27 @@ function doKeyDown(evt) {
             /* Up arrow was pressed */
             console.log("up");
 
-            player.postionY -= 180;
+            player.postionY -= 175;
 
             break;
         case 40:
             /* Down arrow was pressed */
             console.log("dwn");
-            console.log("up,dwn Y" + player.postionY, "left righht X" + player.postionX);
+            PlayerPostion();
             break;
         case 37:
             /* Left arrow was pressed */
             console.log("left");
-            player.postionX -= 10;
+            player.postionX -= 15;
             break;
         case 39:
             /* Right arrow was pressed */
             console.log("right");
-            player.postionX += 10;
+            player.postionX += 15;
             break;
         case 32:
-            /* Right arrow was pressed */
-            console.log("right");
+            /* spacebar was pressed */
+            console.log("space");
             player.postionX += 10;
             player.postionY -= 10;
             break;
@@ -80,25 +89,46 @@ function colorCircle(centerX, centerY, radius, drawColor, tag) {
     canvasContext.beginPath();
     canvasContext.arc(centerX, centerY, radius, 0, Math.PI * 2, true);
     canvasContext.fill();
-
 }
+
+// // this function gives the layout for images
+// function colorImage(image, dx, dy, dWidth, dHeight) {
+//   canvasContext.drawImage("../Frylock.png", player.postionX, player.postionY);
+// }
+
+
+
+//drawing code
+function drawEverything() {
+    colorRect(0, 0, canvas.width, canvas.height, '#C9EEF3', "Main");
+    colorRect(0, 425, 405, canvas.height / 12, "red", "firstRowLeft");
+    colorRect(canvas.width - 650, 425, canvas.width, canvas.height / 12, "red", "firstRowRight");
+    colorRect(90, 250, canvas.width, canvas.height / 12, "green", "secondRow");
+    colorRect(canvas.width - 15, 150, 10, 100, "yellow", "flag");
+    colorRect(player.postionX, player.postionY, 10, 75, "#CE839A", "player");
+    
+    //These draw the images that are loaded on lines 13-19 
+    canvasContext.drawImage(image, player.postionX, player.postionY, 100, 175);
+    canvasContext.drawImage(imge,player.postionY,player.postionX, 100, 175);
+}
+
 
 function gravity() {
 
-    if (player.postionX < 90 && player.postionY < 140) {
+    if (player.postionX < 90 && player.postionY < 176) {
         setTimeout(gravity2ndRow, 100);
     }
 
     function gravity2ndRow() {
-        if (player.postionX < 90 && player.postionY < 130) {
-            player.postionY = 308;
+        if (player.postionX < 90 && player.postionY < 176) {
+            player.postionY = 350;
             console.log("Char Should fall dwm");
             console.log("up,dwn" + player.postionY, "left righht" + player.postionX);
         } else { clearTimeout(); }
     };
 
-    if (player.postionX > 390 && player.postionX < 550) {
-        if (player.postionY > 140 && player.postionY < 350) {
+    if (player.postionX > 404 && player.postionX < 541) {
+        if (player.postionY > 250 && player.postionY < 351) {
 
             setTimeout(gravity1stRow, 100);
         }
@@ -106,10 +136,50 @@ function gravity() {
 
     function gravity1stRow() {
 
-        if (player.postionX > 390 && player.postionX < 550) {
-            player.postionY = 500;
+        if (player.postionX > 404 && player.postionX < 541) {
+            player.postionY = 525;
             console.log("Char Should fall dwm");
             console.log("up,dwn" + player.postionY, "left righht" + player.postionX);
         } else { clearTimeout(); }
     };
+    if (player.postionY < 174) {
+        setTimeout(roof, 10);
+    };
+
+    function roof() {
+        // console.log("stop");
+        player.postionY = 175;
+    }
 }
+
+
+
+function PlayerPostion() {
+    $("#statsHere").html(`X ${player.postionX} is your left or right postion
+       Y ${player.postionY} is your up down postion`);
+}
+
+// function preloader()
+// {
+
+//     // counter
+//     var i = 0;
+
+//     // create object
+//     // imageObj = [
+//     // ];
+
+//     // set image list
+//     imageObj = new Array();
+//     imageObj[0] = "Frylock.png",
+//     imageObj[1] = "Master_Shake.png"
+//     // images[2] = "image3.jpg"
+//     // images[3] = "image4.jpg"
+
+//     // start preloading
+//     for (i = 0; i <imageObj.length; i++) {
+//         imageObj.src = imageObj[i];
+//     }
+
+// console.log(imageObj[0].src);
+// }

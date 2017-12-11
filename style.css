@@ -1,6 +1,11 @@
-/*canvas {
+/*<!-- canvas {
     background: green;
     width:300px;
     height: 50%;
 }
-*/
+ -->*/
+
+#statsHere{
+background-color: #835523; 
+color: white;
+}
