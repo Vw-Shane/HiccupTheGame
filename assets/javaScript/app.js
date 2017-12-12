@@ -15,8 +15,8 @@ var image = new Image();
 var imge = new Image();
 
 // Set the image source and start loading
-image.src = '../assets/pics/Frylock.png';
-imge.src = '../assets/pics/Master_Shake.png'
+image.src = 'assets/pics/Frylock.png';
+imge.src = 'assets/pics/Master_Shake.png'
 
 
 window.onload = function() {
