@@ -1,26 +1,26 @@
-function preloader()
-{
+// function preloader()
+// {
 
-    // counter
-    var i = 0;
+//     // counter
+//     var i = 0;
 
-    // create object
-    imageObj = new Image();
+//     // create object
+//     imageObj = new Image();
 
-    // set image list
-    images = new Array();
-    images[0] = "Frylock.png",
-    images[1] = "Master_Shake.png"
-    // images[2] = "image3.jpg"
-    // images[3] = "image4.jpg"
+//     // set image list
+//     images = new Array();
+//     images[0] = "Frylock.png",
+//     images[1] = "Master_Shake.png"
+//     // images[2] = "image3.jpg"
+//     // images[3] = "image4.jpg"
 
-    // start preloading
-    for (i = 0; i <images.length; i++) {
-        imageObj.src = images[i];
-    }
+//     // start preloading
+//     for (i = 0; i <images.length; i++) {
+//         imageObj.src = images[i];
+//     }
 
 
-}
+// }
 
 
 
