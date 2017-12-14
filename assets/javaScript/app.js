@@ -4,9 +4,15 @@ var player = {
     postionY: 525
 }
 
-
 var enimies = {
+    postionX: 0,
+    postionY: 525
+}
 
+
+
+var enimiesMove = {
+    postionX: 2,
 }
 
 var keysDown = {};
@@ -15,7 +21,7 @@ var image = new Image();
 var imge = new Image();
 
 // Set the image source and start loading
-image.src = '../assets/pics/Frylock.png';
+image.src = '../assets/pics/KirraClipart.png';
 imge.src = '../assets/pics/Master_Shake.png'
 
 
@@ -24,15 +30,16 @@ window.onload = function() {
     console.log(keysDown);
     canvas = document.getElementById('myCanvas');
     canvasContext = canvas.getContext('2d');
-    
+
     var framesPerSecond = 60;
     setInterval(function() {
         drawEverything();
         moveEverything();
 
 
+
     }, 1000 / framesPerSecond);
-    $("#statsHere").append(`${player.postionX} is your left or right postion
+    $("#statsHere").append(`${enimies.postionX} is your left or right postion
         ${player.postionY} is your up down postion`);
 
 };
@@ -41,7 +48,8 @@ function moveEverything() {
 
     window.addEventListener('keydown', doKeyDown, true);
     gravity();
-
+    moveEnemy();
+    win();
 }
 // up,dwn130 left righht80
 function doKeyDown(evt) {
@@ -77,6 +85,16 @@ function doKeyDown(evt) {
     }
 }
 
+function moveEnemy() {
+
+    console.log(canvas.width);
+    console.log(enimies.postionX);
+
+    if (enimies.postionX + enimiesMove.postionX > canvas.width - 1 || enimies.postionX + enimiesMove.postionX < 1) {
+        enimiesMove.postionX = -enimiesMove.postionX;
+    };
+    enimies.postionX += enimiesMove.postionX;
+}
 // this function gives the layout of the rectangels
 function colorRect(leftX, topY, width, height, drawColor, tag) {
     canvasContext.fillStyle = drawColor;
@@ -105,11 +123,12 @@ function drawEverything() {
     colorRect(canvas.width - 650, 425, canvas.width, canvas.height / 12, "red", "firstRowRight");
     colorRect(90, 250, canvas.width, canvas.height / 12, "green", "secondRow");
     colorRect(canvas.width - 15, 150, 10, 100, "yellow", "flag");
-    colorRect(player.postionX, player.postionY, 10, 75, "#CE839A", "player");
-    
+    // colorRect(player.postionX, player.postionY, 10, 75, "#CE839A", "player");
+    colorRect(enimies.postionX, enimies.postionY, 10, 75, "#green", "enemy");
+
     //These draw the images that are loaded on lines 13-19 
-    canvasContext.drawImage(image, player.postionX, player.postionY, 100, 175);
-    canvasContext.drawImage(imge,player.postionY,player.postionX, 100, 175);
+    canvasContext.drawImage(image, player.postionX - 50, player.postionY, 100, 75);
+    canvasContext.drawImage(imge, enimies.postionX - 50, enimies.postionY, 100, 75);
 }
 
 
@@ -183,3 +202,8 @@ function PlayerPostion() {
 
 // console.log(imageObj[0].src);
 // }
+function win() {
+    if (player.postionX > 1184 && player.postionY === 175) {
+        alert("Fuck you ( ͡~ ͜ʖ ͡°)");
+    };
+}
