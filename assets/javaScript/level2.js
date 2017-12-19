@@ -1,64 +1,34 @@
-// player stats
-level = 1;
+//this if statement goes in the file you want this js file to load from be mindful it doubeled your click evetns 
+
+if (player.postionX > 900 && player.postionY === 175) {
+    var d = document,
+        h = d.getElementsByTagName('head')[0],
+        s = d.createElement('script');
+    s.type = 'text/javascript';
+    s.async = true;
+    s.src = '../assets/javaScript/level2.js';
+    h.appendChild(s);
+};
+
+
+player stats
 var player = {
     postionX: 0,
     postionY: 525
-};
-var cloud = {
-    centerX: 40,
-    centerY: 100,
-    radius: 40,
-    drawColor: "grey"
-};
+}
 
 var playerMove = {
     horizon: 15,
     vertical: 175
-};
+}
 var enimies = {
     postionX: 1120,
-    postionY: 350
-};
+    postionY: 525
+}
 
 var enimiesMove = {
     postionX: 5,
-};
-//I have rows being made in varibles so I can change them dynmcialy with new levels  
-var firstRowLeft = {
-    leftX: 0,
-    topY: 425,
-    width: 405,
-    height: 50,
-    drawColor: "red",
-};
-var firstRowRight = {
-    leftX: 550,
-    topY: 425,
-    width: 1200,
-    height: 50,
-    drawColor: "red"
-};
-var secondRowleft = {
-    leftX: 90,
-    topY: 250,
-    width: 1200,
-    height: 50,
-    drawColor: "green"
-};
-var flag = {
-    leftX: 1185,
-    topY: 150,
-    width: 10,
-    height: 100,
-    drawColor: "yellow"
-};
-var gap = {
-    right: 541,
-    left: 404
 }
-
-
-
 
 var keysDown = {};
 // Create a new image object
@@ -66,7 +36,7 @@ var image = new Image();
 var imge = new Image();
 
 // Set the image source and start loading
-image.src = '../assets/pics/KirraClipart.png';
+image.src = '../assets/pics/Master_Shake.png';
 imge.src = '../assets/pics/Master_Shake.png'
 
 
@@ -79,16 +49,22 @@ window.onload = function() {
     setInterval(function() {
         drawEverything();
         moveEverything();
-    }, 1000 / framesPerSecond);    
+
+
+
+    }, 1000 / framesPerSecond);
+    $("#statsHere").append(`${enimies.postionX} is your left or right postion
+        ${player.postionY} is your up down postion`);
+
 };
 
 function moveEverything() {
+
     window.addEventListener('keydown', movePlayer, true);
     gravity();
     moveEnemy();
-    // moveCloud();
     win();
-    change();
+    
 }
 //this function moves the player var
 function movePlayer(evt) {
@@ -97,8 +73,8 @@ function movePlayer(evt) {
             /* Up arrow was pressed */
             console.log("up");
 
-            player.postionY -= playerMove.vertical;
-
+            player.postionY -= 175;
+            PlayerPostion();
             break;
         case 40:
             /* Down arrow was pressed */
@@ -125,12 +101,13 @@ function movePlayer(evt) {
 }
 //this one moves the enemy
 function moveEnemy() {
-    console.log(firstRowRight.leftX);
-    if (enimies.postionX + enimiesMove.postionX > firstRowRight.width || enimies.postionX + enimiesMove.postionX < firstRowRight.leftX) {
+    if (enimies.postionX + enimiesMove.postionX > canvas.width - 1 || enimies.postionX + enimiesMove.postionX < 1) {
         enimiesMove.postionX = -enimiesMove.postionX;
     };
     enimies.postionX += enimiesMove.postionX;
 }
+
+
 
 // this function gives the layout of the rectangels
 function colorRect(leftX, topY, width, height, drawColor, tag) {
@@ -146,7 +123,6 @@ function colorCircle(centerX, centerY, radius, drawColor, tag) {
     canvasContext.fill();
 }
 
-
 //Do Not Delete Yet // this function gives the layout for images 
 // function colorImage(image, dx, dy, dWidth, dHeight) {
 //   canvasContext.drawImage("../Frylock.png", player.postionX, player.postionY);
@@ -156,6 +132,21 @@ function colorCircle(centerX, centerY, radius, drawColor, tag) {
 
 //drawing code
 function drawEverything() {
+    //I have rows being made in varibles so I can change them dynmcialy with new levels  
+    var firstRowLeft = {
+        leftX: 0,
+        topY: 425,
+        width: 405,
+        height: 50,
+        drawColor: "red",
+    };
+    var firstRowRight = {
+        leftX: canvas.width - 650,
+        topY: 425,
+        width: canvas.width,
+        height: canvas.height / 12,
+        drawColor: "red"
+    };
     //the following is the drawing of everything on screen
     colorRect(0, 0, canvas.width, canvas.height, '#C9EEF3', "Main");
 
@@ -163,22 +154,14 @@ function drawEverything() {
 
     colorRect(firstRowRight.leftX, firstRowRight.topY, firstRowRight.width, firstRowRight.height, firstRowRight.drawColor, "I am the other half of first row");
 
-    colorRect(secondRowleft.leftX, secondRowleft.topY, secondRowleft.width, secondRowleft.height, secondRowleft.drawColor, "I am half of second row");
+    colorRect(90, 250, canvas.width, canvas.height / 12, "green", "I am the secondRow");
+    colorRect(canvas.width - 15, 150, 10, 100, "yellow", "I ama flag I represent where to win");
 
-    colorRect(flag.leftX, flag.topY, flag.width, flag.height,
-        flag.drawColor, "I ama flag I represent where to win");
-
-    //My goal will be to have the option of shwoing the follwing two if the images do not load \/\/
-
+    //My goal will be to have the option of shwoing the follwing two if the images do not load //
     // colorRect(player.postionX, player.postionY, 10, 75, "#CE839A", "player");
     // colorRect(enimies.postionX, enimies.postionY, 10, 75, "#green", "enemy");
 
-    // colorCircle(cloud.centerX, cloud.centerY,cloud.radius,cloud.drawColor);
-    // colorCircle(cloud.centerX + 40, cloud.centerY,cloud.radius,cloud.drawColor);
-    // colorCircle(cloud.centerX + 80, cloud.centerY,cloud.radius,cloud.drawColor);
-    // colorCircle(cloud.centerX + 80, cloud.centerY + 20,cloud.radius + 10,cloud.drawColor);
-    // colorCircle(cloud.centerX + 50, cloud.centerY + 20,cloud.radius,cloud.drawColor);
-    //These draw the images that are loaded on lines 13-19 there height an width will be static for now subject to change
+    //These draw the images that are loaded on lines 13-19 
     canvasContext.drawImage(image, player.postionX - 50, player.postionY, 100, 75);
     canvasContext.drawImage(imge, enimies.postionX - 50, enimies.postionY, 100, 75);
 }
@@ -198,7 +181,7 @@ function gravity() {
         } else { clearTimeout(); }
     };
 
-    if (player.postionX > gap.left && player.postionX < gap.right) {
+    if (player.postionX > 404 && player.postionX < 541) {
         if (player.postionY > 250 && player.postionY < 351) {
 
             setTimeout(gravity1stRow, 100);
@@ -207,7 +190,7 @@ function gravity() {
 
     function gravity1stRow() {
 
-        if (player.postionX > gap.left && player.postionX < gap.right) {
+        if (player.postionX > 404 && player.postionX < 541) {
             player.postionY = 525;
             console.log("Char Should fall dwm");
             console.log("up,dwn" + player.postionY, "left righht" + player.postionX);
@@ -223,15 +206,12 @@ function gravity() {
     }
 }
 
-// function moveCloud(){
-//     if (cloud.centerX + enimiesMove.postionX > canvas.width - 1 || cloud.centerX + enimiesMove.postionX < 1) {
-//         enimiesMove.postionX = -enimiesMove.postionX;
-//     }
-//     cloud.centerX += enimiesMove.postionX;
-// }
+
 //I am here for testing purposes 
 function PlayerPostion() {
-    $("#statsHere").html(`Level ${level} Timer Here Tokens ${player.postionX}`);
+    $("#statsHere").html(`X ${player.postionX} is your left or right postion
+       Y ${player.postionY} is your up down postion
+       and Xenime ${enimies.postionX}`);
 }
 
 // function preloader()
@@ -269,25 +249,7 @@ function lose() {
     console.log("loser");
 }
 
-// This is sets up 2nd level I may put this in a seprate file 
-function change() {
-    if (player.postionX > 900 && player.postionY === 175) {
-        setTimeout(level2, 1);               
-    };
 
-    function level2() {
-        player.postionX = 1170
-        player.postionY = 525;
-
-        level = 2;
-        PlayerPostion();
-       firstRowLeft.width = 745;
-       gap.left = 740;
-       gap.right = 880;
-       firstRowRight.leftX = 885;
-      firstRowRight.width = 225;
-      firstRowRight.drawColor = "black";
-        secondRowleft.leftX = 80;
-        secondRowleft.width = 900;
-    } 
-}
+ function level3(){
+console.log("whats in your wallet");
+  }
