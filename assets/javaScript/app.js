@@ -17,11 +17,12 @@ var playerMove = {
 };
 var enimies = {
     postionX: 1120,
-    postionY: 350
+    postionY: 525
 };
 
 var enimiesMove = {
     postionX: 5,
+    // postionY:
 };
 //I have rows being made in varibles so I can change them dynmcialy with new levels  
 var firstRowLeft = {
@@ -53,8 +54,10 @@ var flag = {
     drawColor: "yellow"
 };
 var gap = {
+ 
+    left: 404,
     right: 541,
-    left: 404
+   
 }
 
 
@@ -64,10 +67,12 @@ var keysDown = {};
 // Create a new image object
 var image = new Image();
 var imge = new Image();
+var Ime = new Image();
 
 // Set the image source and start loading
 image.src = '../assets/pics/KirraClipart.png';
-imge.src = '../assets/pics/Master_Shake.png'
+imge.src = '../assets/pics/Master_Shake.png';
+Ime.src = '../assets/pics/coin.png';
 
 
 window.onload = function() {
@@ -79,7 +84,7 @@ window.onload = function() {
     setInterval(function() {
         drawEverything();
         moveEverything();
-    }, 1000 / framesPerSecond);    
+    }, 1000 / framesPerSecond);
 };
 
 function moveEverything() {
@@ -121,6 +126,11 @@ function movePlayer(evt) {
             player.postionX += 10;
             player.postionY -= 10;
             break;
+    }
+    switch(player.postionX) {
+        case 75:
+            alert("hey");
+            break;   
     }
 }
 //this one moves the enemy
@@ -181,6 +191,7 @@ function drawEverything() {
     //These draw the images that are loaded on lines 13-19 there height an width will be static for now subject to change
     canvasContext.drawImage(image, player.postionX - 50, player.postionY, 100, 75);
     canvasContext.drawImage(imge, enimies.postionX - 50, enimies.postionY, 100, 75);
+    canvasContext.drawImage(Ime,50, 350, 50, 35)
 }
 
 
@@ -231,7 +242,7 @@ function gravity() {
 // }
 //I am here for testing purposes 
 function PlayerPostion() {
-    $("#statsHere").html(`Level ${level} Timer Here Tokens ${player.postionX}`);
+    $("#statsHere").html(`Level ${level} Timer Here Tokens XX${player.postionX} YYYYY ${player.postionY}`);
 }
 
 // function preloader()
@@ -271,23 +282,24 @@ function lose() {
 
 // This is sets up 2nd level I may put this in a seprate file 
 function change() {
-    if (player.postionX > 900 && player.postionY === 175) {
-        setTimeout(level2, 1);               
+    if (level === 1 && player.postionX > 900 && player.postionY === 175) {
+        setTimeout(level2, 1);
     };
 
     function level2() {
-        player.postionX = 1170
+        player.postionX = 1170;
         player.postionY = 525;
-
         level = 2;
-        PlayerPostion();
-       firstRowLeft.width = 745;
-       gap.left = 740;
-       gap.right = 880;
-       firstRowRight.leftX = 885;
-      firstRowRight.width = 225;
-      firstRowRight.drawColor = "black";
+        PlayerPostion();//this function will be updated to show score and tokens and time
+        firstRowLeft.width = 745;
+        gap.left = 740;
+        gap.right = 880;
+        firstRowRight.leftX = 885;
+        firstRowRight.width = 225;
+        firstRowRight.drawColor = "black";
         secondRowleft.leftX = 80;
         secondRowleft.width = 900;
-    } 
+        flag.leftX = 105;
+        flag.topY = 150;
+    }
 }
