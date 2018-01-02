@@ -26,15 +26,20 @@
     <!-- Modal -->
     <div id="modal1" class="modal" style="border-radius: 10px;background-color: #E1EBEB">
         <div class="modal-content" style="height: 100%;background-color: #E1EBEB">
-            <h4>Log in to play</h4>
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="/login" class="brand-logo" id="loginNav">&nbsp;&nbsp;Login to Play</a>
+                </div>
+            </nav>
             <div class="container" style="border-radius: 10px; background-color: #E38888;width:95%; height: 80%; margin-top:20px;padding-top: 25px; ">
-                <br><br>
+                <br>
+                <br>
                 <div class="row" id="score&play">
                     <div class="col s5 push-s2 ">
-                        <a class="waves-effect waves-light btn" style="border-radius: 5px;"onclick="location.href='otherPages/scorePage.html';"><i class="material-icons right">contact_mail</i>Scores</a>
+                        <a class="waves-effect waves-light btn" style="border-radius: 5px;" onclick="location.href='/scores';"><i class="material-icons right">contact_mail</i>Scores</a>
                     </div>
                     <div class="col s7 push-s2 ">
-                        <a class="waves-effect waves-light btn" style="border-radius: 5px;"  onclick="location.href='otherPages/game.html';">
+                        <a class="waves-effect waves-light btn" style="border-radius: 5px;" href="/game">
 
                         <i class="material-icons right">whatshot</i>Play</a>
                     </div>
@@ -42,16 +47,16 @@
                 <br>
                 <div class="row" id="arean&extra">
                     <div class="col s5 push-s2 ">
-                        <a class="waves-effect waves-light btn" style="border-radius: 5px;"  onclick="location.href='otherPages/game.html';"><i class="material-icons left">mood_bad </i>Arena </a>
+                        <a class="waves-effect waves-light btn" style="border-radius: 5px;" onclick="location.href='/arena';"><i class="material-icons left">mood_bad </i>Arena </a>
                     </div>
                     <div class="col s7 push-s2 ">
-                        <a class="waves-effect waves-light btn" style="border-radius: 5px;"  onclick="location.href='otherPages/game.html';"><i class="material-icons right">monetization_on</i>Extras</a>
+                        <a class="waves-effect waves-light btn" style="border-radius: 5px;" onclick="location.href='/extra';"><i class="material-icons right">monetization_on</i>Extras</a>
                     </div>
                 </div>
                 <br>
                 <div class="row" id="contact">
                     <div class="col s6 push-s4 ">
-                        <a class="waves-effect waves-light btn" style="border-radius: 5px;" onclick="location.href='otherPages/contact.html';"><i class="material-icons right">contact_mail</i>Contact Us</a>
+                        <a class="waves-effect waves-light btn" style="border-radius: 5px;" href="/contact"><i class="material-icons right">contact_mail</i>Contact Us</a>
                     </div>
                 </div>
             </div>

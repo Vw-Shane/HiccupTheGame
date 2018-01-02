@@ -1,0 +1,26 @@
+{
+  "name": "tennisgame",
+  "version": "1.0.0",
+  "description": "Errors and comments  \t lines 13-19 are the current way images get loaded so they can be drawn later \t line 23 calls line 162-185 which involves using a for loop to load the images I \t haven’t figured out how to then draw the images though  \t 94-97 were going to be layouts for the images like the rectangles and circles  \t 108 will be what is seen if there is no image",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.16.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vw-Shane/tennisgame.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vw-Shane/tennisgame/issues"
+  },
+  "homepage": "https://github.com/Vw-Shane/tennisgame#readme"
+}
