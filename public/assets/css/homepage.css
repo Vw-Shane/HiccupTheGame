@@ -1,0 +1,27 @@
+body{
+	background-color: #75FFFF; 	
+}
+
+#modal1{
+	 margin-top: 5%;
+	 border-radius: 10px;
+	 background-color: #E1EBEB;
+}
+
+#modal-content1{
+	
+	height: 100%;
+	background-color: #E1EBEB;
+}
+
+#mainContainer{
+	border-radius: 10px; 
+	background-color: #E38888;
+	width:95%; height: 80%; 
+	margin-top:20px;
+	padding-top: 25px; 
+}
+
+#Btns{
+	border-radius: 5px;
+}
