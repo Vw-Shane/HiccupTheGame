@@ -1,3 +1,5 @@
+alert("Im beign read");
+
 // player stats
 level = 1;
 var player = {
@@ -77,6 +79,8 @@ Ime.src = '../assets/pics/coin.png';
 
 window.onload = function() {
     // preloader();
+    alert("I've loaded");
+    console.log("hello");
     canvas = document.getElementById('myCanvas');
     canvasContext = canvas.getContext('2d');
     //30 frame makes enemy move slower
