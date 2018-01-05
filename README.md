@@ -23,8 +23,8 @@ Limit the enemies from falling ? Or maybe have them just disappear if they are i
 
 Update:12/2/17 
 	What do I need?
-		enemy spawn 
-		reach first level end  
+		enemy spawn ✓
+		reach first level end  ✓
 		life bar that indicate a loss
 		tutorial for first level, intrdoduce new things on the later level
 		after the Tutorial module pop up continue with game ? or Main menu 
