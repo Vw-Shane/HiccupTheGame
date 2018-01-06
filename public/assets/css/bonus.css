@@ -1,5 +1,5 @@
 body{
-	background-color:#75FFFF; 	
+	background-color:#75FFFF; 	 	
 }
 /*#75FFFF this blue was to bright maybe use else where?*/
 
@@ -10,13 +10,13 @@ body{
 	  overflow:hidden;
 }
 
-#modal-content1{
+#modal-content{
 	width: 100%;
 	height: 100%;
 	background-color: #E1EBEB;
 }
 
-#mainContainer{
+#main-container{
 	border-radius: 10px; 
 	background-color: #E38888;
 	width:95%; height: 80%; 
@@ -24,15 +24,10 @@ body{
 	padding-top: 25px; 
 }
 
-.nav-wrapper{
-	background-color: #1ED067;
+#resizePics{
+	height: 20%;
+	width: 20%;
 }
 
-#main-container{
-	border-radius: 10px; 
-	background-color: #1ED067;
-	width:95%; 
-	height: 80%; 
-	margin-top:20px;
-	padding-top: 25px; "
-}
+
+
