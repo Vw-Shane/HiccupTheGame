@@ -1,15 +1,17 @@
 body{
-	background-color: #75FFFF; 	
+	background-color:#3E8080 ; 	
 }
+/*#75FFFF this blue was to bright maybe use else where?*/
 
 #modal1{
 	 margin-top: 5%;
 	 border-radius: 10px;
 	 background-color: #E1EBEB;
+	  overflow:hidden;
 }
 
 #modal-content1{
-	
+	width: 100%;
 	height: 100%;
 	background-color: #E1EBEB;
 }
