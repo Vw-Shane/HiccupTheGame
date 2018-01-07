@@ -4,16 +4,13 @@
 <head>
     <meta charset="utf-8">
     <title> Hiccup the game </title>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-   <link rel="stylesheet" href="assets/css/homepage.css" type="text/css" />
-  
+    <link rel="stylesheet" href="assets/css/homepage.css" type="text/css" />
     <link rel="shortcut icon" type="image/png" href=" tab icon here ">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    
 </head>
 
 <body>
@@ -38,10 +35,19 @@
                     <div class="col s5 push-s2 ">
                         <a class="waves-effect waves-light btn" id="Btns" onclick="location.href='/scores';"><i class="material-icons right">contact_mail</i>Scores</a>
                     </div>
-                    <div class="col s7 push-s2 ">
-                        <a class="waves-effect waves-light btn" id="Btns" href="/game">
-
+                    <div class="col s7 push-s2 " onclick="myFunction()">
+                        <a class="waves-effect waves-light btn" id="Btns">
                         <i class="material-icons right">whatshot</i>Play</a>
+                        <script>
+                        function myFunction() {
+                            var txt;
+                            if (confirm("Are you Logged in?") === true) {
+                                window.location.href = "/arena";
+                            }else{
+                                window.location.href = "/game";
+                            }
+                        }
+                        </script>
                     </div>
                 </div>
                 <br>
