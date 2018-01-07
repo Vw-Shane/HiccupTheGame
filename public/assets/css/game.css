@@ -1,0 +1,26 @@
+ canvas {
+ 	float: left;
+    background: green;
+    width:80%;
+    height: 100%;
+}
+
+
+#statsHere{
+	float: left;
+background-color: #835523; 
+color: white;
+width:80%;
+}
+#lvl{
+	font-family: 'Prosto One', cursive;
+	font-size: 20px;
+}
+
+/*#return{
+margin-left: 2%;
+background-color: #E1EBEB;
+border-radius: 5px;
+width: 25%;
+height:50px;
+}*/

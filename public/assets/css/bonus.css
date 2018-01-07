@@ -29,5 +29,12 @@ body{
 	width: 20%;
 }
 
+#name_cost,#facts{
+	background-color: white;
+	border-radius: 5px;
+}
+
+
+
 
 

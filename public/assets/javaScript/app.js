@@ -1,6 +1,6 @@
-alert("Im beign read");
-
 // player stats
+// var health = 3;
+
 level = 1;
 var player = {
     postionX: 0,
@@ -56,10 +56,10 @@ var flag = {
     drawColor: "yellow"
 };
 var gap = {
- 
+
     left: 404,
     right: 541,
-   
+
 }
 
 
@@ -70,16 +70,19 @@ var keysDown = {};
 var image = new Image();
 var imge = new Image();
 var Ime = new Image();
+var hearts = new Image();
 
 // Set the image source and start loading
 image.src = '../assets/pics/KirraClipart.png';
 imge.src = '../assets/pics/Master_Shake.png';
 Ime.src = '../assets/pics/coin.png';
+hearts.src = '../assets/pics/heart8Bit.png';
+// hearts.src'../assets/pics/heart8Bit.png';
 
 
 window.onload = function() {
     // preloader();
-    alert("I've loaded");
+    whatLvlIsThis();
     console.log("hello");
     canvas = document.getElementById('myCanvas');
     canvasContext = canvas.getContext('2d');
@@ -131,10 +134,10 @@ function movePlayer(evt) {
             player.postionY -= 10;
             break;
     }
-    switch(player.postionX) {
+    switch (player.postionX) {
         case 75:
             alert("hey");
-            break;   
+            break;
     }
 }
 //this one moves the enemy
@@ -195,7 +198,12 @@ function drawEverything() {
     //These draw the images that are loaded on lines 13-19 there height an width will be static for now subject to change
     canvasContext.drawImage(image, player.postionX - 50, player.postionY, 100, 75);
     canvasContext.drawImage(imge, enimies.postionX - 50, enimies.postionY, 100, 75);
-    canvasContext.drawImage(Ime,50, 350, 50, 35)
+    canvasContext.drawImage(Ime, 50, 350, 50, 35);
+    // for (var i = 0; i < hearts.length; i++) {
+    //     hearts[i]
+    // }
+    canvasContext.drawImage(hearts,40,20,25,25);
+    canvasContext.drawImage(hearts,70,20,25,25);
 }
 
 
@@ -247,6 +255,11 @@ function gravity() {
 //I am here for testing purposes 
 function PlayerPostion() {
     $("#statsHere").html(`Level ${level} Timer Here Tokens XX${player.postionX} YYYYY ${player.postionY}`);
+    $("#statsHere").html(`Tokens: 23 &nbsp;&nbsp; Elapsed Time 1:10`);
+}
+
+function whatLvlIsThis() {
+    $("#lvl").html(`Level ${level}`);
 }
 
 // function preloader()
@@ -277,6 +290,7 @@ function PlayerPostion() {
 function win() {
     if (player.postionX === 1185 && player.postionY === 175) {
         console.log("Fuck you ( ͡~ ͜ʖ ͡°)");
+
     };
 }
 // This will be called if enimy and player meet
@@ -294,7 +308,8 @@ function change() {
         player.postionX = 1170;
         player.postionY = 525;
         level = 2;
-        PlayerPostion();//this function will be updated to show score and tokens and time
+        PlayerPostion(); //this function will be updated to show score and tokens and time
+        whatLvlIsThis();
         firstRowLeft.width = 745;
         gap.left = 740;
         gap.right = 880;
