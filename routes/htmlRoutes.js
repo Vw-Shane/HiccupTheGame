@@ -26,6 +26,10 @@ module.exports = function(app) {
 		res.sendFile(path.join(__dirname, "../otherPages/bonus.html"));
 	});
 
+	app.get("/signUp", function(req, res){
+		res.sendFile(path.join(__dirname, "../otherPages/signUp.html"));
+	});
+
 	app.get("/", function(req, res) {
     res.sendFile(path.join(__dirname, "../index.html"));
   });

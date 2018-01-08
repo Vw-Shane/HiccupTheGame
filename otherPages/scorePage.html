@@ -6,88 +6,95 @@
     <title> Hiccup the game </title>
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    <link rel="stylesheet" type="text/css" href="assets/css/">
     <script type="text/javascript" src="assets/javaScript/">
     </script>
     <link rel="shortcut icon" type="image/png" href=" tab icon here ">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/bonus.css" type="text/css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-   
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+
 <body>
-    <div class="jumbotron">
-        <div class="container">
-            <h3>This page will be a visual representation of what the React version will be.<br> Which is found in 'my-app' </h3>
-        </div>
-    </div>
-    <div class="container-fluid" style=" ">
-        <div class="row" id="titleRow" style="text-align: center;background-color: red;">
-            <h2> Hiccup the game records</h2>
-        </div>
-        <div class="row" id="tableTitleRow">
-            <div class="col s5 push-s2">
-                <h4>Speedrunners</h4>
-                <div class="row" id="timeTitleRow">
-                    <div class="col s11 pull-s2">
-                        <div class="container-fluid" class="z-depth-5" style="background-color: #75FFFF; border-radius: 5px;">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>User Name</th>
-                                        <th>Level</th>
-                                        <th>Fastest Times</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Username1</td>
-                                        <td>Level 3</td>
-                                        <td>0:50</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Username2</td>
-                                        <td>Level 3</td>
-                                        <td>2:30</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Username3</td>
-                                        <td>level 3</td>
-                                        <td>2:31</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>    
+    <script>
+    $(document).ready(function() {
+        // Show the Modal on load
+        $("#modal1").modal("show");
+    });
+    </script>
+    <!-- Modal -->
+    <div id="modal1" class="modal">
+        <div class="modal-content" id="modal-content">
+            <div class="container-fluid" style=" ">
+                <div class="row" id="titleRow" style="text-align: center;background-color: red;">
+                    <h2> Hiccup the game records</h2>
                 </div>
-            </div>
-            <div class="col s5 push-s3">
-                <h4> Token Hoarders</h4>
-                <div class="row" id="tokenTitleRow">
-                    <div class="col s11 pull-s2">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>User Name</th>
-                                    <th>Most Tokens</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Alvin</td>
-                                    <td>20808</td>
-                                </tr>
-                                <tr>
-                                    <td>Alan</td>
-                                    <td>532</td>
-                                </tr>
-                                <tr>
-                                    <td>Jonathan</td>
-                                    <td>300</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>    
+                <div class="row" id="tableTitleRow">
+                    <div class="col s5 push-s2">
+                        <h4>Speedrunners</h4>
+                        <div class="row" id="timeTitleRow">
+                            <div class="col s11 pull-s2">
+                                <div class="container-fluid" class="z-depth-5" style="background-color: #75FFFF; border-radius: 5px;">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>User Name</th>
+                                                <th>Level</th>
+                                                <th>Fastest Times</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Username1</td>
+                                                <td>Level 3</td>
+                                                <td>0:50</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Username2</td>
+                                                <td>Level 3</td>
+                                                <td>2:30</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Username3</td>
+                                                <td>level 3</td>
+                                                <td>2:31</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s5 push-s3">
+                        <h4> Token Hoarders</h4>
+                        <div class="row" id="tokenTitleRow">
+                            <div class="col s11 pull-s2">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>User Name</th>
+                                            <th>Most Tokens</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Alvin</td>
+                                            <td>20808</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Alan</td>
+                                            <td>532</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jonathan</td>
+                                            <td>300</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
