@@ -15,10 +15,14 @@ body{
 	height: 100%;
 	background-color: #E1EBEB;
 }
+nav{
+	background-color: #ffa587;
+	color:black;
+}
 
 #main-container{
 	border-radius: 10px; 
-	background-color: #E38888;
+	background-color: #ffa587;
 	width:95%; height: 80%; 
 	margin-top:20px;
 	padding-top: 25px; 
@@ -30,7 +34,7 @@ body{
 }
 
 #name_cost,#facts{
-	background-color: white;
+	background-color:#87e1ff;
 	border-radius: 5px;
 }
 
