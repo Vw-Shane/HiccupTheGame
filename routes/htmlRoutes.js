@@ -19,8 +19,13 @@ module.exports = function(app) {
 	});
 
 	app.get("/arena", function(req, res){
+		res.sendFile(path.join(__dirname, "../otherPages/arena.html"));
+	});
+
+	app.get("/levels", function(req, res){
 		res.sendFile(path.join(__dirname, "../otherPages/levels.html"));
 	});
+
 
 	app.get("/extra", function(req, res){
 		res.sendFile(path.join(__dirname, "../otherPages/bonus.html"));

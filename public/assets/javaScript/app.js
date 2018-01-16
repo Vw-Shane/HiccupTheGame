@@ -297,14 +297,7 @@ function win() {
 function lose() {
     console.log("loser");
 }
-
-// This is sets up 2nd level I may put this in a seprate file 
-function change() {
-    if (level === 1 && player.postionX > 900 && player.postionY === 175) {
-        setTimeout(level2, 1);
-    };
-
-    function level2() {
+function level2() {
         player.postionX = 1170;
         player.postionY = 525;
         level = 2;
@@ -321,4 +314,11 @@ function change() {
         flag.leftX = 105;
         flag.topY = 150;
     }
+// This is sets up 2nd level I may put this in a seprate file 
+function change() {
+    if (level === 1 && player.postionX > 900 && player.postionY === 175) {
+        setTimeout(level2, 1);
+    };
+
+    
 }
