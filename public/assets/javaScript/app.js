@@ -1,5 +1,5 @@
 // player stats
-// var health = 3;
+var health = 2;
 
 level = 1;
 var player = {
@@ -13,6 +13,13 @@ var cloud = {
     centerY: 100,
     radius: 40,
     drawColor: "grey"
+};
+
+var heartpostion = {
+    X: 40,
+    Y: 20,
+    X2: 70,
+    Y2: 20,
 };
 var attack = 0;
 
@@ -72,7 +79,10 @@ var gap = {
     right: 541,
 
 }
-var fireBallX = 0;
+var fireBall = {
+    Y: 0,
+    X: 0
+}
 
 
 
@@ -114,6 +124,8 @@ function moveEverything() {
     gravity();
     firstRowEnemy();
     firem();
+    lose();
+    console.log(`__ Enimies X ${enimies.postionX} -___--_ Enimies Y ${enimies.postionY}`);
     // moveCloud();
     win();
     change();
@@ -146,14 +158,15 @@ function movePlayer(evt) {
             player.postionX += playerMove.horizon;
             break;
         case 32:
-            fireBallX = player.postionX + 1;
+            fireBall.Y = player.postionY;
+            fireBall.X = player.postionX + 1;
             /* spacebar was pressed */
-            console.log("space");
+            // console.log("look here"+fireBall.Y);
             player.height += 10;
             player.width += 10;
             attack = 100;
 
-            console.log(fireBallX);
+
             // player.postionX += 10;
             // player.postionY -= 10;
             setTimeout(HH, 100);
@@ -161,7 +174,7 @@ function movePlayer(evt) {
     }
     switch (player.postionX) {
         case 75:
-            alert("hey");
+            // alert("hey");
             break;
     }
 }
@@ -186,25 +199,27 @@ function moveEnemy(rowL, rowR) {
 
 function firem() {
 
-    if (fireBallX < 1200) {
-        fireBallX += 5;
-        console.log(fireBallX);
+    if (fireBall.X < 1200) {
+        fireBall.X += 5;
+        // console.log(fireBall.X);
     } else {
-        fireBallX = 2000;
-        console.log("Doop")
+        fireBall.X = 2000;
+        // console.log("Doop")
     }
-    if (fireBallX === enimies.postionX + 1 || fireBallX === enimies.postionX - 4) {
-        fireBallX = 2000;
+    if (fireBall.Y === enimies.postionY && fireBall.X === enimies.postionX + 1 || fireBall.Y === enimies.postionY && fireBall.X === enimies.postionX - 4) {
+        fireBall.X = 2000;
         console.log("Shits Gone");
         enimies.postionX = 2000;
         setTimeout(resetEnemy, 3000);
         //call reset enemy funk ,30000
-        
+
     }
 }
-function resetEnemy(){
+
+function resetEnemy() {
     enimies.postionX = 1100;
 }
+
 function firstRowEnemy() {
     moveEnemy(firstRowRight.leftX, firstRowRight.width);
 }
@@ -267,10 +282,10 @@ function drawEverything() {
     // for (var i = 0; i < hearts.length; i++) {
     //     hearts[i]
     // }
-    canvasContext.drawImage(hearts, 40, 20, 25, 25);
-    canvasContext.drawImage(hearts, 70, 20, 25, 25);
+    canvasContext.drawImage(hearts, heartpostion.X, heartpostion.Y, 25, 25);
+    canvasContext.drawImage(hearts, heartpostion.X2, heartpostion.Y2, 25, 25);
     if (attack === 100) {
-        canvasContext.drawImage(fireBall, fireBallX, player.postionY, 25, 25);
+        canvasContext.drawImage(fireBall, fireBall.X, fireBall.Y, 25, 25);
     }
 }
 
@@ -322,8 +337,8 @@ function gravity() {
 // }
 //I am here for testing purposes 
 function PlayerPostion() {
-    $("#statsHere").html(`Level ${level} Timer Here Tokens XX${player.postionX} YYYYY ${player.postionY}`);
-    $("#statsHere").html(`Tokens: 23 &nbsp;&nbsp; Elapsed Time 1:10`);
+    $("#statsHere").html(`Level ${level}Player's X ${player.postionX}--- Player's Y ${player.postionY} _-_--__ Enimies X ${enimies.postionX} -___--_ Enimies Y ${enimies.postionY}  `);
+    // $("#statsHere").html(`Tokens: 23 &nbsp;&nbsp; Elapsed Time 1:10`);
 }
 
 function whatLvlIsThis() {
@@ -362,8 +377,28 @@ function win() {
     };
 }
 // This will be called if enimy and player meet
+function refreshPage() {
+    window.location.reload();
+}
+
 function lose() {
-    console.log("loser");
+    if (health === 2) {
+        if (player.postionY === enimies.postionY && player.postionX === enimies.postionX - 15) {
+            heartpostion.Y2 = -100;
+            health = 1;
+        }
+    } else if (health === 1) {
+        if (player.postionY === enimies.postionY && player.postionX === enimies.postionX - 15) {
+            alert("Whoah");
+            heartpostion.Y = -100;
+            health = 0;
+        }
+
+    } else if (health === 0) {
+        if (player.postionY === enimies.postionY && player.postionX === enimies.postionX - 15) {
+            refreshPage();
+        }
+    }
 }
 
 function level2() {
