@@ -1,12 +1,11 @@
 // player stats
 // var health = 3;
-
+require
+import {level2}  from '/lvl1.js';
 level = 1;
 var player = {
     postionX: 0,
-    postionY: 525,
-    height: 100,
-    width: 75
+    postionY: 525
 };
 var cloud = {
     centerX: 40,
@@ -78,13 +77,13 @@ var gap = {
 
 var keysDown = {};
 // Create a new image object
-var playerSim = new Image();
+var image = new Image();
 var imge = new Image();
 var Ime = new Image();
 var hearts = new Image();
 
 // Set the image source and start loading
-playerSim.src = '../assets/pics/KirraClipart.png';
+image.src = '../assets/pics/KirraClipart.png';
 imge.src = '../assets/pics/Master_Shake.png';
 Ime.src = '../assets/pics/coin.png';
 hearts.src = '../assets/pics/heart8Bit.png';
@@ -141,13 +140,11 @@ function movePlayer(evt) {
             break;
         case 32:
             /* spacebar was pressed */
-            console.log("space");
-            player.height += 10;
-            player.width += 10;
+            console.log("space");  
+            // drawImage(hearts, 100, 20, 25, 25);
             moveShit = 100;
-            // player.postionX += 10;
-            // player.postionY -= 10;
-            setTimeout(HH, 100);
+            player.postionX += 10;
+            player.postionY -= 10;
             break;
     }
     switch (player.postionX) {
@@ -155,12 +152,6 @@ function movePlayer(evt) {
             alert("hey");
             break;
     }
-}
-
-function HH() {
-
-    player.height -= 10;
-    player.width -= 10;
 }
 //all you need now is the function with the inputs 
 function moveEnemy(rowL, rowR) {
@@ -226,7 +217,7 @@ function drawEverything() {
     // colorCircle(cloud.centerX + 80, cloud.centerY + 20,cloud.radius + 10,cloud.drawColor);
     // colorCircle(cloud.centerX + 50, cloud.centerY + 20,cloud.radius,cloud.drawColor);
     //These draw the images that are loaded on lines 13-19 there height an width will be static for now subject to change
-    canvasContext.drawImage(playerSim, player.postionX - 50, player.postionY, player.height, player.width);
+    canvasContext.drawImage(image, player.postionX - 50, player.postionY, 100, 75);
     canvasContext.drawImage(imge, enimies.postionX - 50, enimies.postionY, 100, 75);
 
     canvasContext.drawImage(Ime, 50, 350, 50, 35);
@@ -234,7 +225,7 @@ function drawEverything() {
     //     hearts[i]
     // }
     canvasContext.drawImage(hearts, 40, 20, 25, 25);
-    if (moveShit === 100) {
+    if (moveShit===100) {
         canvasContext.drawImage(hearts, enimies.postionX - 50, 20, 25, 25);
     }
 }
@@ -292,7 +283,7 @@ function PlayerPostion() {
 }
 
 function whatLvlIsThis() {
-    $("#lvl").html(`Level ${level}`);
+    $("#lvl").html(`Level ${level}`);   
 }
 
 // function preloader()
@@ -331,23 +322,7 @@ function lose() {
     console.log("loser");
 }
 
-function level2() {
-    player.postionX = 1170;
-    player.postionY = 525;
-    level = 2;
-    PlayerPostion(); //this function will be updated to show score and tokens and time
-    whatLvlIsThis();
-    firstRowLeft.width = 745;
-    gap.left = 740;
-    gap.right = 880;
-    firstRowRight.leftX = 885;
-    firstRowRight.width = 225;
-    firstRowRight.drawColor = "black";
-    secondRowleft.leftX = 80;
-    secondRowleft.width = 900;
-    flag.leftX = 105;
-    flag.topY = 150;
-}
+// 
 // This is sets up 2nd level I may put this in a seprate file 
 function change() {
     if (level === 1 && player.postionX > 900 && player.postionY === 175) {

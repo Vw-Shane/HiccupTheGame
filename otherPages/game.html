@@ -27,6 +27,25 @@
             <h4 onclick="location.href='/extra'">Buy Some Power Ups</h4>
         </div>
     </div>
+    <script>
+    function Level() {
+        var txt;
+        if (confirm("Continue Game?") === true) {
+            window.location.href = "/login";
+        } else {
+            window.location.href = "/game";
+        }
+    }
+
+    function powerUp() {
+        var txt;
+        if (confirm("Continue Game?") === true) {
+            window.location.href = "/login";
+        } else {
+            window.location.href = "/game";
+        }
+    }
+    </script>
 </body>
 
 </html>
