@@ -14,7 +14,7 @@ var cloud = {
     radius: 40,
     drawColor: "grey"
 };
-var moveShit = 0;
+var attack = 0;
 
 
 var playerMove = {
@@ -72,22 +72,25 @@ var gap = {
     right: 541,
 
 }
-
+var fireBallX = 0;
 
 
 
 var keysDown = {};
 // Create a new image object
 var playerSim = new Image();
-var imge = new Image();
-var Ime = new Image();
+var enemy = new Image();
+var coin = new Image();
 var hearts = new Image();
+var fireBall = new Image();
 
 // Set the image source and start loading
+
 playerSim.src = '../assets/pics/KirraClipart.png';
-imge.src = '../assets/pics/Master_Shake.png';
-Ime.src = '../assets/pics/coin.png';
+enemy.src = '../assets/pics/Master_Shake.png';
+coin.src = '../assets/pics/coin.png';
 hearts.src = '../assets/pics/heart8Bit.png';
+fireBall.src = '../assets/pics/fireBall.png';
 // hearts.src'../assets/pics/heart8Bit.png';
 
 
@@ -98,7 +101,7 @@ window.onload = function() {
     canvas = document.getElementById('myCanvas');
     canvasContext = canvas.getContext('2d');
     //30 frame makes enemy move slower
-    
+
     var framesPerSecond = 60;
     setInterval(function() {
         drawEverything();
@@ -110,7 +113,7 @@ function moveEverything() {
     window.addEventListener('keydown', movePlayer, true);
     gravity();
     firstRowEnemy();
-
+    firem();
     // moveCloud();
     win();
     change();
@@ -126,6 +129,7 @@ function movePlayer(evt) {
 
             break;
         case 40:
+
             /* Down arrow was pressed */
             console.log("dwn");
             PlayerPostion();
@@ -137,15 +141,19 @@ function movePlayer(evt) {
             break;
         case 39:
             /* Right arrow was pressed */
-            console.log("right" + moveShit);
+            console.log("right");
+
             player.postionX += playerMove.horizon;
             break;
         case 32:
+            fireBallX = player.postionX + 1;
             /* spacebar was pressed */
             console.log("space");
             player.height += 10;
             player.width += 10;
-            moveShit = 100;
+            attack = 100;
+
+            console.log(fireBallX);
             // player.postionX += 10;
             // player.postionY -= 10;
             setTimeout(HH, 100);
@@ -170,6 +178,21 @@ function moveEnemy(rowL, rowR) {
         enimiesMove.postionX = -enimiesMove.postionX;
     };
     enimies.postionX += enimiesMove.postionX;
+
+}
+
+
+
+
+function firem() {
+
+    if (fireBallX < 1200) {
+        fireBallX += 4.5;
+        console.log("woop");
+    } else {
+        fireBallX = 2000;
+        console.log("Doop")
+    }
 }
 
 function firstRowEnemy() {
@@ -228,15 +251,16 @@ function drawEverything() {
     // colorCircle(cloud.centerX + 50, cloud.centerY + 20,cloud.radius,cloud.drawColor);
     //These draw the images that are loaded on lines 13-19 there height an width will be static for now subject to change
     canvasContext.drawImage(playerSim, player.postionX - 50, player.postionY, player.height, player.width);
-    canvasContext.drawImage(imge, enimies.postionX - 50, enimies.postionY, 100, 75);
+    canvasContext.drawImage(enemy, enimies.postionX - 50, enimies.postionY, 100, 75);
 
-    canvasContext.drawImage(Ime, 50, 350, 50, 35);
+    canvasContext.drawImage(coin, 50, 350, 50, 35);
     // for (var i = 0; i < hearts.length; i++) {
     //     hearts[i]
     // }
     canvasContext.drawImage(hearts, 40, 20, 25, 25);
-    if (moveShit === 100) {
-        canvasContext.drawImage(hearts, enimies.postionX - 50, 20, 25, 25);
+    canvasContext.drawImage(hearts, 70, 20, 25, 25);
+    if (attack === 100) {
+        canvasContext.drawImage(fireBall, fireBallX, player.postionY, 25, 25);
     }
 }
 
