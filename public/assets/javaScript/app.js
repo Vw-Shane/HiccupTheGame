@@ -187,14 +187,24 @@ function moveEnemy(rowL, rowR) {
 function firem() {
 
     if (fireBallX < 1200) {
-        fireBallX += 4.5;
-        console.log("woop");
+        fireBallX += 5;
+        console.log(fireBallX);
     } else {
         fireBallX = 2000;
         console.log("Doop")
     }
+    if (fireBallX === enimies.postionX + 1 || fireBallX === enimies.postionX - 4) {
+        fireBallX = 2000;
+        console.log("Shits Gone");
+        enimies.postionX = 2000;
+        setTimeout(resetEnemy, 3000);
+        //call reset enemy funk ,30000
+        
+    }
 }
-
+function resetEnemy(){
+    enimies.postionX = 1100;
+}
 function firstRowEnemy() {
     moveEnemy(firstRowRight.leftX, firstRowRight.width);
 }
