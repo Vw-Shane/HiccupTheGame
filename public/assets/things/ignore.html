@@ -14,8 +14,8 @@
     <link rel="shortcut icon" type="image/png" href=" tab icon here ">
 </head>
 
-<body>
-    <canvas id="gameCanavas"></canvas>
+<body> <canvas id="gameCanavas" width="1200" height="600"></canvas>
+ 
     <script>
     var canvas;
     var canvasContext;
@@ -150,10 +150,8 @@ function touchMove(e) {
         };
     };
     //
-    function draw() {
-  var ctx = canvas.getContext('2d');
-    ctx.canvas.width  = window.innerWidth;
-  ctx.canvas.height = window.innerHeight;
+  
+   
   function drawEverything() {
         colorRect(0, 0, canvas.width, canvas.height, 'black', "Main");
         colorRect(10, paddleUser, paddleWidth, paddleHeight, 'white', "userPaddle");
