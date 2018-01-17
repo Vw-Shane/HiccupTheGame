@@ -100,7 +100,7 @@ playerSim.src = '../assets/pics/KirraClipart.png';
 enemy.src = '../assets/pics/Master_Shake.png';
 coin.src = '../assets/pics/coin.png';
 hearts.src = '../assets/pics/heart8Bit.png';
-fireBall.src = '../assets/pics/fireBall.png';
+fireBall.src = '../assets/pics/fireball.png';
 // hearts.src'../assets/pics/heart8Bit.png';
 
 
