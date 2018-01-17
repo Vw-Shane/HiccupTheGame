@@ -98,12 +98,7 @@ window.onload = function() {
     canvas = document.getElementById('myCanvas');
     canvasContext = canvas.getContext('2d');
     //30 frame makes enemy move slower
-    ('touchmove', function() {
-      var touchPos = stage.getPointerPosition();
-      var x = touchPos.x - 190;
-      var y = touchPos.y - 40;
-      alert('x: ' + x + ', y: ' + y);
-    });
+    
     var framesPerSecond = 60;
     setInterval(function() {
         drawEverything();
