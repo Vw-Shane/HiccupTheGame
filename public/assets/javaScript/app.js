@@ -39,9 +39,9 @@ var enimiesMove = {
     slower: .5
 };
 
-var token = {
-    postionX: 50,
-    postionY: 350,
+var coinPosition = {
+   X: 75,
+    Y: 350,
     count: 0
 }
 //I have rows being made in varibles so I can change them dynmcialy with new levels  
@@ -125,7 +125,8 @@ function moveEverything() {
     firstRowEnemy();
     firem();
     lose();
-    console.log(`__ Enimies X ${enimies.postionX} -___--_ Enimies Y ${enimies.postionY}`);
+    coinLogic();
+    console.log(` __ Enimies X ${enimies.postionX} -___--_ Enimies Y ${enimies.postionY}`);
     // moveCloud();
     win();
     change();
@@ -276,9 +277,10 @@ function drawEverything() {
     // colorCircle(cloud.centerX + 50, cloud.centerY + 20,cloud.radius,cloud.drawColor);
     //These draw the images that are loaded on lines 13-19 there height an width will be static for now subject to change
     canvasContext.drawImage(playerSim, player.postionX - 50, player.postionY, player.height, player.width);
+    canvasContext.drawImage(coin, coinPosition.X, coinPosition.Y, 50, 35);
     canvasContext.drawImage(enemy, enimies.postionX - 50, enimies.postionY, 100, 75);
 
-    canvasContext.drawImage(coin, 50, 350, 50, 35);
+    
     // for (var i = 0; i < hearts.length; i++) {
     //     hearts[i]
     // }
@@ -337,7 +339,7 @@ function gravity() {
 // }
 //I am here for testing purposes 
 function PlayerPostion() {
-    $("#statsHere").html(`Level ${level}Player's X ${player.postionX}--- Player's Y ${player.postionY} _-_--__ Enimies X ${enimies.postionX} -___--_ Enimies Y ${enimies.postionY}  `);
+    $("#statsHere").html(`Coin Stats ${coinPosition.count} Level ${level}Player's X ${player.postionX}--- Player's Y ${player.postionY} _-_--__ Enimies X ${enimies.postionX} -___--_ Enimies Y ${enimies.postionY}  `);
     // $("#statsHere").html(`Tokens: 23 &nbsp;&nbsp; Elapsed Time 1:10`);
 }
 
@@ -389,7 +391,7 @@ function lose() {
         }
     } else if (health === 1) {
         if (player.postionY === enimies.postionY && player.postionX === enimies.postionX - 15) {
-            alert("Whoah");
+           
             heartpostion.Y = -100;
             health = 0;
         }
@@ -398,6 +400,14 @@ function lose() {
         if (player.postionY === enimies.postionY && player.postionX === enimies.postionX - 15) {
             refreshPage();
         }
+    }
+}
+
+function coinLogic(){
+    if (player.postionY === coinPosition.Y && player.postionX === coinPosition.X) {
+        coinPosition.count ++;
+        coinPosition.X = 1005;
+        coinPosition.Y = 525
     }
 }
 
