@@ -40,7 +40,7 @@ var enimiesMove = {
 };
 
 var coinPosition = {
-   X: 75,
+    X: 75,
     Y: 350,
     count: 0
 }
@@ -125,8 +125,8 @@ function moveEverything() {
     firstRowEnemy();
     firem();
     lose();
-    coinLogic();
-    console.log(` __ Enimies X ${enimies.postionX} -___--_ Enimies Y ${enimies.postionY}`);
+    coinLogic(15, 1185, 15, 175, 525, 175);
+
     // moveCloud();
     win();
     change();
@@ -171,6 +171,11 @@ function movePlayer(evt) {
             // player.postionX += 10;
             // player.postionY -= 10;
             setTimeout(HH, 100);
+            break;
+        case 84:
+            coinPosition.X =
+                Math.floor(Math.random() * 1200) + 1;
+
             break;
     }
     switch (player.postionX) {
@@ -280,7 +285,7 @@ function drawEverything() {
     canvasContext.drawImage(coin, coinPosition.X, coinPosition.Y, 50, 35);
     canvasContext.drawImage(enemy, enimies.postionX - 50, enimies.postionY, 100, 75);
 
-    
+
     // for (var i = 0; i < hearts.length; i++) {
     //     hearts[i]
     // }
@@ -339,7 +344,7 @@ function gravity() {
 // }
 //I am here for testing purposes 
 function PlayerPostion() {
-    $("#statsHere").html(`Coin Stats ${coinPosition.count} Level ${level}Player's X ${player.postionX}--- Player's Y ${player.postionY} _-_--__ Enimies X ${enimies.postionX} -___--_ Enimies Y ${enimies.postionY}  `);
+    $("#statsHere").html(`Coin Stats ${coinPosition.X} Level ${level}Player's X ${player.postionX}--- Player's Y ${player.postionY} _-_--__ Enimies X ${enimies.postionX} -___--_ Enimies Y ${enimies.postionY}  `);
     // $("#statsHere").html(`Tokens: 23 &nbsp;&nbsp; Elapsed Time 1:10`);
 }
 
@@ -391,7 +396,7 @@ function lose() {
         }
     } else if (health === 1) {
         if (player.postionY === enimies.postionY && player.postionX === enimies.postionX - 15) {
-           
+
             heartpostion.Y = -100;
             health = 0;
         }
@@ -403,13 +408,15 @@ function lose() {
     }
 }
 
-function coinLogic(){
+function coinLogic(minX, maxX, multipleX, minY, maxY, multipleY) {
     if (player.postionY === coinPosition.Y && player.postionX === coinPosition.X) {
-        coinPosition.count ++;
-        coinPosition.X = 1005;
-        coinPosition.Y = 525
+        coinPosition.count++;
+        coinPosition.X = Math.floor(Math.random() * ((maxX - minX) / multipleX)) * multipleX + minX;
+        coinPosition.Y = Math.floor(Math.random() * ((maxY - minY) / multipleY)) * multipleY + minY;
+        console.log(`Coin thing happend ${coinPosition.X}`);
     }
 }
+
 
 function level2() {
     player.postionX = 1170;
