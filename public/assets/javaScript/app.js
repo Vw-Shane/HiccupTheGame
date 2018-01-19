@@ -106,8 +106,7 @@ fireBall.src = '../assets/pics/fireball.png';
 
 window.onload = function() {
     // preloader();
-    whatLvlIsThis();
-    console.log("hello");
+   
     canvas = document.getElementById('myCanvas');
     canvasContext = canvas.getContext('2d');
     //30 frame makes enemy move slower
@@ -126,7 +125,7 @@ function moveEverything() {
     firem();
     lose();
     coinLogic(15, 1185, 15, 175, 525, 175);
-
+     whatLvlIsThis();
     // moveCloud();
     win();
     change();
@@ -349,7 +348,7 @@ function PlayerPostion() {
 }
 
 function whatLvlIsThis() {
-    $("#lvl").html(`Level ${level}`);
+    $("#lvl").html(`Level ${level} &nbsp;&nbsp;&nbsp;&nbsp; Coins ${coinPosition.count}`);
 }
 
 // function preloader()
@@ -379,8 +378,6 @@ function whatLvlIsThis() {
 //this function is what happens if player reaches flag on first level
 function win() {
     if (player.postionX === 1185 && player.postionY === 175) {
-        console.log("Fuck you ( ͡~ ͜ʖ ͡°)");
-
     };
 }
 // This will be called if enimy and player meet
