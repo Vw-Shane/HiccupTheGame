@@ -43,8 +43,8 @@ var enimiesMove = {
 };
 
 var coinPosition = {
-    X: 75,
-    Y: 350,
+    X: 1020,
+    Y: 525,
     count: 0
 }
 //I have rows being made in varibles so I can change them dynmcialy with new levels  
@@ -323,16 +323,29 @@ function drawEverything() {
 
 function gravity() {
 
-    if (player.postionX < 90 && player.postionY < 176) {
+    if (player.postionX - secondRowleft.leftX < 0 && player.postionY < 176 
+        || secondRowleft.width + secondRowleft.leftX - player.postionX < 0
+         ) {
         setTimeout(gravity2ndRow, 100);
     }
 
     function gravity2ndRow() {
-        if (player.postionX < 90 && player.postionY < 176) {
+        if (level < 3) {
+        if(player.postionY < 176) {
             player.postionY = 350;
             console.log("Char Should fall dwm");
             console.log("up,dwn" + player.postionY, "left right" + player.postionX);
         } else { clearTimeout(); }
+    };
+    
+    if (level === 3 ) {
+        if (player.postionX < secondRowleft.leftX2 && player.postionY < 176 || player.postionX > secondRowleft.leftX2 + secondRowleft.width2 && player.postionY < 176) {
+            player.postionY = 350;
+            console.log("Char Should fall dwm");
+            console.log("up,dwn" + player.postionY, "left right" + player.postionX);
+        } else { clearTimeout(); }
+    };
+    
     };
 
     if (player.postionX > gap.left && player.postionX < gap.right || player.postionX > gap.left2 && player.postionX < gap.right2) {
@@ -469,7 +482,6 @@ function level2() {
     secondRowleft.width = 900;
     flag.leftX = 105;
     flag.topY = 150;
-
 }
 
 function level3() {
