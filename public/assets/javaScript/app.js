@@ -73,6 +73,14 @@ var secondRowleft = {
     leftX3: 0,
     width3: 0
 };
+var thirdRow = {
+    leftX: 0,
+    topY: 0,
+    width: 0,
+    height: 0,
+    drawColor: " ",
+
+};
 
 var flag = {
     leftX: 1185,
@@ -209,18 +217,16 @@ function moveEnemy(rowL, rowR) {
 
 }
 //88888888 Errors
-var dickbutt = 3;
+var brickChange = 3;
 
 function moveBrick() {
 
     if (secondRowleft.leftX2 - 5 > 1200 ||
         secondRowleft.leftX2 + 5 < 0) {
-        secondRowleft.leftX2 = -dickbutt;
+        secondRowleft.leftX2 = -brickChange;
     };
-    secondRowleft.leftX2 += dickbutt;
-    if (level === 3) {
-        flag.leftX = secondRowleft.leftX2 + secondRowleft.leftX2 / 4;
-    };
+    secondRowleft.leftX2 += brickChange;
+
 }
 
 
@@ -283,16 +289,18 @@ function drawEverything() {
     //the following is the drawing of everything on screen
     colorRect(0, 0, canvas.width, canvas.height, canvasBackground, "Main");
 
+    colorRect(flag.leftX, flag.topY, flag.width, flag.height,
+        flag.drawColor, "I ama flag I represent where to win");
+
     colorRect(firstRowLeft.leftX, firstRowLeft.topY, firstRowLeft.width, firstRowLeft.height, firstRowLeft.drawColor, "I am half of firstRow");
 
     colorRect(firstRowRight.leftX, firstRowRight.topY, firstRowRight.width, firstRowRight.height, firstRowRight.drawColor, "I am the other half of first row");
 
     colorRect(secondRowleft.leftX, secondRowleft.topY, secondRowleft.width, secondRowleft.height, secondRowleft.drawColor, "I am half of second row");
     colorRect(secondRowleft.leftX2, secondRowleft.topY, secondRowleft.width2, secondRowleft.height, secondRowleft.drawColor, "I am half of second row");
-    colorRect(secondRowleft.leftX3, secondRowleft.topY, secondRowleft.width3, secondRowleft.height, secondRowleft.drawColor, "I am half of second row");
+    colorRect(thirdRow.leftX, thirdRow.topY, thirdRow.width, thirdRow.height, thirdRow.drawColor, "I am thirdRow");
 
-    colorRect(flag.leftX, flag.topY, flag.width, flag.height,
-        flag.drawColor, "I ama flag I represent where to win");
+
 
     //My goal will be to have the option of shwoing the follwing two if the images do not load \/\/
 
@@ -322,30 +330,36 @@ function drawEverything() {
 
 
 function gravity() {
-
-    if (player.postionX - secondRowleft.leftX < 0 && player.postionY < 176 
-        || secondRowleft.width + secondRowleft.leftX - player.postionX < 0
-         ) {
+    if (level != 3 && player.postionY < 174) {
+        setTimeout(roof, 10);
+    } // else if (level === 3  && player.postionX > 975 && player.postionX < 765){
+    //      setTimeout(roof, 10);
+    // }
+    if (player.postionX - secondRowleft.leftX < 0 && player.postionY < 176 ||
+        secondRowleft.width + secondRowleft.leftX - player.postionX < 0
+    ) {
         setTimeout(gravity2ndRow, 100);
     }
 
     function gravity2ndRow() {
         if (level < 3) {
-        if(player.postionY < 176) {
-            player.postionY = 350;
-            console.log("Char Should fall dwm");
-            console.log("up,dwn" + player.postionY, "left right" + player.postionX);
-        } else { clearTimeout(); }
-    };
-    
-    if (level === 3 ) {
-        if (player.postionX < secondRowleft.leftX2 && player.postionY < 176 || player.postionX > secondRowleft.leftX2 + secondRowleft.width2 && player.postionY < 176) {
-            player.postionY = 350;
-            console.log("Char Should fall dwm");
-            console.log("up,dwn" + player.postionY, "left right" + player.postionX);
-        } else { clearTimeout(); }
-    };
-    
+            if (player.postionY < 176) {
+                player.postionY = 350;
+                console.log("Char Should fall dwm");
+                console.log("up,dwn" + player.postionY, "left right" + player.postionX);
+            } else { clearTimeout(); }
+        };
+
+        if (level === 3) {
+            if (player.postionX < secondRowleft.leftX2 && player.postionY < 176 || player.postionX > secondRowleft.leftX2 + secondRowleft.width2 && player.postionY < 174) {
+                if (player.postionX > 975 || player.postionX < 766) {
+                    player.postionY = 350;
+                };
+                console.log("Char Should fall dwm");
+                console.log("up,dwn" + player.postionY, "left right" + player.postionX);
+            } else { clearTimeout(); }
+        };
+
     };
 
     if (player.postionX > gap.left && player.postionX < gap.right || player.postionX > gap.left2 && player.postionX < gap.right2) {
@@ -363,9 +377,7 @@ function gravity() {
             console.log("up,dwn" + player.postionY, "left right" + player.postionX);
         } else { clearTimeout(); }
     };
-    if (player.postionY < 174) {
-        setTimeout(roof, 10);
-    };
+
 
     function roof() {
         // console.log("stop");
@@ -504,22 +516,58 @@ function level3() {
     secondRowleft.drawColor = "black";
     secondRowleft.leftX2 = 450;
     secondRowleft.width2 = 300;
-    secondRowleft.leftX3 = 925;
-    secondRowleft.width3 = 300;
-    flag.leftX = secondRowleft.leftX2 + dickbutt;
+    thirdRow.leftX = 780;
+    thirdRow.topY = 75;
+    thirdRow.width = 200;
+    thirdRow.height = 25;
+    thirdRow.drawColor = "blue";
+    flag.leftX = thirdRow.leftX + thirdRow.width / 2;
+    flag.topY = 0;
+
 }
+
+function level4() {
+    player.postionX = 1170;
+    player.postionY = 525;
+    level = 4;
+    PlayerPostion(); //this function will be updated to show score and tokens and time
+    enimies = {
+        postionX: 90,
+        postionY: 175
+    };
+    enimiesMove.respawn = 500;
+    firstRowLeft.width = 745;
+    gap.left = 740;
+    gap.right = 880;
+    gap.left2 = 1109,
+        gap.right2 = 1201,
+        firstRowRight.leftX = 885;
+    firstRowRight.width = 225;
+    firstRowRight.drawColor = "black";
+    secondRowleft.leftX = 80;
+    secondRowleft.width = 900;
+    flag.leftX = 105;
+    flag.topY = 150;
+}
+
 // This is sets up 2nd level I may put this in a seprate file 
 function change() {
     if (level === 1 && player.postionX === flag.leftX && player.postionY === flag.topY + 25) {
         setTimeout(level2, 1);
     } else if (level === 2 && player.postionX === flag.leftX && player.postionY === flag.topY + 25) {
         setTimeout(level3, 1);
-    }else if (level === 3 && player.postionX === flag.leftX && player.postionY === flag.topY + 25) {
-        console.log(dickbutt);
+    } else if (level === 3 && player.postionX > 854 && player.postionY === 0) {
+            setTimeout(level4, 1);
+        }
     }
+//     } else if (level === 4 && player.postionX > 854 && player.postionY === 0) {
+//         console.log(brickChange); {
+//             setTimeout(level4, 1);
 
+//         }
+//     }
 
-}
+// }
 
 
 function playerLoop() {

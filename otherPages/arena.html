@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <meta charset="utf-8">
+    <title> Hiccup the game </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="../assets/css/game.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/javaScript/app.js"></script>
+    <link rel="shortcut icon" type="image/png" href=" tab icon here ">
+    <link href="https://fonts.googleapis.com/css?family=Prosto+One" rel="stylesheet">
+    <!-- Did nothing <meta name="apple-mobile-web-app-capable" content="yes" /> -->
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="container" id="lvl">
+            <!-- I want this to not use append but Oh well -->
+        </div>
+        <canvas id="myCanvas" width="1200" height="600"></canvas>
+        <div class="container" id="statsHere">
+            <!-- I want this to not use append but Oh well -->
+        </div>
+        <div class="container" id="return">
+            <h4 onclick="location.href='/levels'">Return to Levels</h4>
+            <h4 onclick="location.href='/extra'">Buy Some Power Ups</h4>
+        </div>
+    </div>
+    <script>
+    function Level() {
+        var txt;
+        if (confirm("Continue Game?") === true) {
+            window.location.href = "/login";
+        } else {
+            window.location.href = "/game";
+        }
+    }
+
+    function powerUp() {
+        var txt;
+        if (confirm("Continue Game?") === true) {
+            window.location.href = "/login";
+        } else {
+            window.location.href = "/game";
+        }
+    }
+    </script>
+</body>
+
+</html>
