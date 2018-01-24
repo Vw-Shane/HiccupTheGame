@@ -23,7 +23,7 @@ var playerMove = {
     horizon: 15,
     vertical: 175,
     horizonF: -15,
-    verticalF: -175
+    verticalF: 90
 
 };
 
@@ -76,6 +76,7 @@ var secondRowleft = {
     height: 50,
     drawColor: "green",
     leftX2: 0,
+    topY2: 250,
     width2: 0,
     leftX3: 0,
     width3: 0
@@ -223,69 +224,69 @@ function movePlayer(evt) {
                 break;
         }
     }
-    if (level ===4) {
+    if (level === 4) {
         switch (evt.keyCode) {
-        case 38:
-            /* Up arrow was pressed */
-            console.log("up");
+            case 38:
+                /* Up arrow was pressed */
+                console.log("up");
 
-            player.postionYF += playerMove.vertical;
+                player.postionYF += playerMove.vertical;
 
-            break;
-        case 40:
+                break;
+            case 40:
 
-            /* Down arrow was pressed */
-            console.log("dwn");
-            PlayerPostion();
-            break;
-        case 37:
-            /* Left arrow was pressed */
-            console.log("left");
-            player.postionXF += playerMove.horizon;
-            break;
-        case 39:
-            /* Right arrow was pressed */
-            console.log("right");
+                /* Down arrow was pressed */
+                console.log("dwn");
+                PlayerPostion();
+                break;
+            case 37:
+                /* Left arrow was pressed */
+                console.log("left");
+                player.postionXF -= playerMove.horizon;
+                break;
+            case 39:
+                /* Right arrow was pressed */
+                console.log("right");
 
-            player.postionXF -= playerMove.horizon;
-            break;
-        case 32:
-            fireBall.Y = player.postionYF;
-            fireBall.X = player.postionXF + 1;
-            /* spacebar was pressed */
-            // console.log("look here"+fireBall.Y);
-            player.height += 10;
-            player.width += 10;
-            attack = 100;
+                player.postionXF += playerMove.horizon;
+                break;
+            case 32:
+                fireBall.Y = player.postionYF;
+                fireBall.X = player.postionXF + 1;
+                /* spacebar was pressed */
+                // console.log("look here"+fireBall.Y);
+                player.height += 10;
+                player.width += 10;
+                attack = 100;
 
 
-            // player.postionXF += 10;
-            // player.postionYF -= 10;
-            setTimeout(HH, 100);
-            break;
-        case 84:
-            level4();
+                // player.postionXF += 10;
+                // player.postionYF -= 10;
+                setTimeout(HH, 100);
+                break;
+            case 84:
+                level4();
 
-            break;
+                break;
             case 87:
-            /* Up arrow was pressed */
-            console.log("up");
+                /* Up arrow was pressed */
+                console.log("up");
 
-            player.postionYF += playerMove.vertical;
+                player.postionYF += playerMove.verticalF;
 
-            break;
+                break;
             case 65:
-            /* Left arrow was pressed */
-            console.log("left");
-            player.postionXF += playerMove.horizon;
-            break;
+                /* Left arrow was pressed */
+                console.log("left");
+                player.postionXF -= playerMove.horizon;
+                break;
             case 68:
-            /* Right arrow was pressed */
-            console.log("right");
+                /* Right arrow was pressed */
+                console.log("right");
 
-            player.postionXF -= playerMove.horizon;
-            break;
-    }
+                player.postionXF += playerMove.horizon;
+                break;
+        }
     }
 }
 
@@ -384,7 +385,7 @@ function drawEverything() {
     colorRect(firstRowRight.leftX, firstRowRight.topY, firstRowRight.width, firstRowRight.height, firstRowRight.drawColor, "I am the other half of first row");
 
     colorRect(secondRowleft.leftX, secondRowleft.topY, secondRowleft.width, secondRowleft.height, secondRowleft.drawColor, "I am half of second row");
-    colorRect(secondRowleft.leftX2, secondRowleft.topY, secondRowleft.width2, secondRowleft.height, secondRowleft.drawColor, "I am half of second row");
+    colorRect(secondRowleft.leftX2, secondRowleft.topY2, secondRowleft.width2, secondRowleft.height, secondRowleft.drawColor, "I am half of second row");
     colorRect(thirdRow.leftX, thirdRow.topY, thirdRow.width, thirdRow.height, thirdRow.drawColor, "I am thirdRow");
 
 
@@ -418,7 +419,22 @@ function drawEverything() {
 
 
 function gravity() {
-    if (level != 3 && player.postionY < 174) {
+    if (level === 4) {
+        if (player.postionYF === 175) {
+            if (player.postionXF < 90 || player.postionXF > 990) {
+                player.postionYF = 0;
+            }
+        } else if (player.postionYF === 350) {
+            if (player.postionXF < 885 || player.postionXF > 1111) {
+                player.postionYF = 175;
+            }
+        } else if (player.postionYF === 525) {
+            if (player.postionXF > 750) {
+                player.postionYF = 350;
+            }
+        }
+    }
+    if (level < 3 && player.postionY < 174) {
         setTimeout(roof, 10);
     } // else if (level === 3  && player.postionX > 975 && player.postionX < 765){
     //      setTimeout(roof, 10);
@@ -481,7 +497,7 @@ function gravity() {
 // }
 //I am here for testing purposes 
 function PlayerPostion() {
-    $("#statsHere").html(`Coin Stats ${coinPosition.X} Level ${level}Player's X ${player.postionX}--- Player's Y ${player.postionY} _-_--__ Enimies X ${enimies.postionX} -___--_ Enimies Y ${enimies.postionY}  `);
+    $("#statsHere").html(`Coin Stats ${coinPosition.X} Level ${level}Player's X ${player.postionXF}--- Player's Y ${player.postionYF} _-_--__ Enimies X ${enimies.postionX} -___--_ Enimies Y ${enimies.postionY}  `);
     // $("#statsHere").html(`Tokens: 23 &nbsp;&nbsp; Elapsed Time 1:10`);
 }
 
@@ -556,115 +572,126 @@ function coinLogic(minX, maxX, multipleX, minY, maxY, multipleY) {
         coinPosition.X = Math.floor(Math.random() * ((maxX - minX) / multipleX)) * multipleX + minX;
         coinPosition.Y = Math.floor(Math.random() * ((maxY - minY) / multipleY)) * multipleY + minY;
         console.log(`Coin thing happend ${coinPosition.X}`);
+    } else if 
+        (player.postionYF === coinPosition.Y && player.postionXF === coinPosition.X) {
+            coinPosition.count++;
+            coinPosition.X = Math.floor(Math.random() * ((maxX - minX) / multipleX)) * multipleX + minX;
+            coinPosition.Y = Math.floor(Math.random() * ((maxY - minY) / multipleY)) * multipleY + minY;
+            console.log(`Coin thing happend ${coinPosition.X}`);
+        }
     }
-}
 
-
-function level2() {
-    player.postionX = 1170;
-    player.postionY = 525;
-    level = 2;
-    PlayerPostion(); //this function will be updated to show score and tokens and time
-    enimies = {
-        postionX: 90,
-        postionY: 175
-    };
-    enimiesMove.respawn = 500;
-    firstRowLeft.width = 745;
-    gap.left = 740;
-    gap.right = 880;
-    gap.left2 = 1109,
-        gap.right2 = 1201,
-        firstRowRight.leftX = 885;
-    firstRowRight.width = 225;
-    firstRowRight.drawColor = "black";
-    secondRowleft.leftX = 80;
-    secondRowleft.width = 900;
-    flag.leftX = 105;
-    flag.topY = 150;
-}
-
-function level3() {
-    level = 3;
-    player.postionX = 630;
-    player.postionY = 525;
-    enimies.postionX = 600;
-    enimies = {
-        postionX: 90,
-        postionY: 175
-    };
-    // respawn may change
-    enimiesMove.respawn = 90;
-    firstRowLeft.width = 565;
-    firstRowRight.leftX = 700;
-    firstRowRight.width = 325;
-    canvasBackground = "#A7ACAC";
-    secondRowleft.leftX = 0;
-    secondRowleft.width = 300;
-    secondRowleft.drawColor = "black";
-    secondRowleft.leftX2 = 450;
-    secondRowleft.width2 = 300;
-    thirdRow.leftX = 780;
-    thirdRow.topY = 75;
-    thirdRow.width = 200;
-    thirdRow.height = 25;
-    thirdRow.drawColor = "blue";
-    flag.leftX = thirdRow.leftX + thirdRow.width / 2;
-    flag.topY = 0;
-}
-
-function level4() {
-    player.postionXF = 0;
-    player.postionYF = 100;
-    player.height = 75;
-    player.width = 50;
-    player.postionX = 0;
-    player.postionY = -100;
-    level = 4;
-    PlayerPostion(); //this function will be updated to show score and tokens and time
-    enimies = {
-        postionX: 90,
-        postionY: 175
-    };
-    enimiesMove.respawn = 500;
-    firstRowLeft.width = 745;
-    gap.left = 740;
-    gap.right = 880;
-    gap.left2 = 1109,
-        gap.right2 = 1201,
-        firstRowRight.leftX = 885;
-    firstRowRight.width = 225;
-    firstRowRight.drawColor = "black";
-    secondRowleft.leftX = 80;
-    secondRowleft.width = 900;
-    flag.leftX = 105;
-    flag.topY = 150;
-}
-
-// This is sets up 2nd level I may put this in a seprate file 
-function change() {
-    if (level === 1 && player.postionX === flag.leftX && player.postionY === flag.topY + 25) {
-        setTimeout(level2, 1);
-    } else if (level === 2 && player.postionX === flag.leftX && player.postionY === flag.topY + 25) {
-        setTimeout(level3, 1);
-    } else if (level === 3 && player.postionX > 854 && player.postionY === 0) {
-        setTimeout(level4, 1);
-    }
-}
-//     } else if (level === 4 && player.postionX > 854 && player.postionY === 0) {
-//         console.log(brickChange); {
-//             setTimeout(level4, 1);
-
-//         }
-//     }
-
-// }
-
-
-function playerLoop() {
-    if (player.postionX > 1200) {
-        player.postionX = 15;
-    } else if (player.postionX < 0) {
+    function level2() {
         player.postionX = 1170;
+        player.postionY = 525;
+        level = 2;
+        PlayerPostion(); //this function will be updated to show score and tokens and time
+        enimies = {
+            postionX: 90,
+            postionY: 175
+        };
+        enimiesMove.respawn = 500;
+        firstRowLeft.width = 745;
+        gap.left = 740;
+        gap.right = 880;
+        gap.left2 = 1109,
+            gap.right2 = 1201,
+            firstRowRight.leftX = 885;
+        firstRowRight.width = 225;
+        firstRowRight.drawColor = "black";
+        secondRowleft.leftX = 80;
+        secondRowleft.width = 900;
+        flag.leftX = 105;
+        flag.topY = 150;
     }
-}
+
+    function level3() {
+        level = 3;
+        player.postionX = 630;
+        player.postionY = 525;
+        enimies.postionX = 600;
+        enimies = {
+            postionX: 90,
+            postionY: 175
+        };
+        // respawn may change
+        enimiesMove.respawn = 90;
+        firstRowLeft.width = 565;
+        firstRowRight.leftX = 700;
+        firstRowRight.width = 325;
+        canvasBackground = "#A7ACAC";
+        secondRowleft.leftX = 0;
+        secondRowleft.width = 300;
+        secondRowleft.drawColor = "black";
+        secondRowleft.leftX2 = 450;
+        secondRowleft.width2 = 300;
+        thirdRow.leftX = 780;
+        thirdRow.topY = 75;
+        thirdRow.width = 200;
+        thirdRow.height = 25;
+        thirdRow.drawColor = "blue";
+        flag.leftX = thirdRow.leftX + thirdRow.width / 2;
+        flag.topY = 0;
+    }
+
+    function level4() {
+        player.postionXF = 0;
+        player.postionYF = 0;
+        player.height = 75;
+        player.width = 50;
+        player.postionX = 0;
+        player.postionY = -100;
+
+        level = 4;
+        PlayerPostion(); //this function will be updated to show score and tokens and time
+        enimies = {
+            postionX: 90,
+            postionY: 225
+        };
+        secondRowleft.topY2 = 1450;
+        thirdRow.leftX = -1000;
+        enimiesMove.respawn = 500;
+        firstRowLeft.width = 745;
+        gap.left = 740;
+        gap.right = 880;
+        gap.left2 = 1109,
+            gap.right2 = 1201,
+            firstRowRight.leftX = 885;
+        firstRowLeft.topY = 475;
+        firstRowRight.width = 225;
+        firstRowRight.topY = 300,
+            firstRowRight.drawColor = "black";
+        secondRowleft.leftX = 80;
+        secondRowleft.topY = 125;
+        secondRowleft.width = 900;
+        flag.leftX = 105;
+        flag.topY = 500;
+    }
+
+    // This is sets up 2nd level I may put this in a seprate file 
+    function change() {
+        if (level === 1 && player.postionX === flag.leftX && player.postionY === flag.topY + 25) {
+            setTimeout(level2, 1);
+        } else if (level === 2 && player.postionX === flag.leftX && player.postionY === flag.topY + 25) {
+            setTimeout(level3, 1);
+        } else if (level === 3 && player.postionX > 854 && player.postionY === 0) {
+            setTimeout(level4, 1);
+        }
+    }
+    //     } else if (level === 4 && player.postionX > 854 && player.postionY === 0) {
+    //         console.log(brickChange); {
+    //             setTimeout(level4, 1);
+
+    //         }
+    //     }
+
+    // }
+
+
+    function playerLoop() {
+        if (player.postionX > 1200) {
+            player.postionX = 15;
+        } else if (player.postionX < 0) {
+            player.postionX = 1170;
+        }
+    }
