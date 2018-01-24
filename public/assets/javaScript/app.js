@@ -7,7 +7,11 @@ var player = {
     postionX: 0,
     postionY: 525,
     height: 100,
-    width: 75
+    width: 75,
+    postionXF: 0,
+    postionYF: -100,
+    heightF: 100,
+    widthF: 75
 };
 var cloud = {
     centerX: 40,
@@ -17,7 +21,10 @@ var cloud = {
 };
 var playerMove = {
     horizon: 15,
-    vertical: 175
+    vertical: 175,
+    horizonF: -15,
+    verticalF: -175
+
 };
 
 var heartpostion = {
@@ -106,13 +113,14 @@ var fireBall = {
 var keysDown = {};
 // Create a new image object
 var playerSim = new Image();
+var playerFlip = new Image();
 var enemy = new Image();
 var coin = new Image();
 var hearts = new Image();
 var fireBall = new Image();
 
 // Set the image source and start loading
-
+playerFlip.src = '../assets/pics/KirraClipartFlip.png'
 playerSim.src = '../assets/pics/KirraClipart.png';
 enemy.src = '../assets/pics/Master_Shake.png';
 coin.src = '../assets/pics/coin.png';
@@ -151,12 +159,77 @@ function moveEverything() {
 }
 //this function moves the player var
 function movePlayer(evt) {
-    switch (evt.keyCode) {
+    if (level != 4) {
+        switch (evt.keyCode) {
+            case 38:
+                /* Up arrow was pressed */
+                console.log("up");
+
+                player.postionY -= playerMove.vertical;
+
+                break;
+            case 40:
+
+                /* Down arrow was pressed */
+                console.log("dwn");
+                PlayerPostion();
+                break;
+            case 37:
+                /* Left arrow was pressed */
+                console.log("left");
+                player.postionX -= playerMove.horizon;
+                break;
+            case 39:
+                /* Right arrow was pressed */
+                console.log("right");
+
+                player.postionX += playerMove.horizon;
+                break;
+            case 32:
+                fireBall.Y = player.postionY;
+                fireBall.X = player.postionX + 1;
+                /* spacebar was pressed */
+                // console.log("look here"+fireBall.Y);
+                player.height += 10;
+                player.width += 10;
+                attack = 100;
+
+
+                // player.postionX += 10;
+                // player.postionY -= 10;
+                setTimeout(HH, 100);
+                break;
+            case 84:
+                level4();
+
+                break;
+            case 87:
+                /* Up arrow was pressed */
+                console.log("up");
+
+                player.postionY -= playerMove.vertical;
+
+                break;
+            case 65:
+                /* Left arrow was pressed */
+                console.log("left");
+                player.postionX -= playerMove.horizon;
+                break;
+            case 68:
+                /* Right arrow was pressed */
+                console.log("right");
+
+                player.postionX += playerMove.horizon;
+                break;
+        }
+    }
+    if (level ===4) {
+        switch (evt.keyCode) {
         case 38:
             /* Up arrow was pressed */
             console.log("up");
 
-            player.postionY -= playerMove.vertical;
+            player.postionYF += playerMove.vertical;
 
             break;
         case 40:
@@ -168,17 +241,17 @@ function movePlayer(evt) {
         case 37:
             /* Left arrow was pressed */
             console.log("left");
-            player.postionX -= playerMove.horizon;
+            player.postionXF += playerMove.horizon;
             break;
         case 39:
             /* Right arrow was pressed */
             console.log("right");
 
-            player.postionX += playerMove.horizon;
+            player.postionXF -= playerMove.horizon;
             break;
         case 32:
-            fireBall.Y = player.postionY;
-            fireBall.X = player.postionX + 1;
+            fireBall.Y = player.postionYF;
+            fireBall.X = player.postionXF + 1;
             /* spacebar was pressed */
             // console.log("look here"+fireBall.Y);
             player.height += 10;
@@ -186,19 +259,33 @@ function movePlayer(evt) {
             attack = 100;
 
 
-            // player.postionX += 10;
-            // player.postionY -= 10;
+            // player.postionXF += 10;
+            // player.postionYF -= 10;
             setTimeout(HH, 100);
             break;
         case 84:
-            level3();
+            level4();
 
             break;
-    }
-    switch (player.postionX) {
-        case 75:
-            // alert("hey");
+            case 87:
+            /* Up arrow was pressed */
+            console.log("up");
+
+            player.postionYF += playerMove.vertical;
+
             break;
+            case 65:
+            /* Left arrow was pressed */
+            console.log("left");
+            player.postionXF += playerMove.horizon;
+            break;
+            case 68:
+            /* Right arrow was pressed */
+            console.log("right");
+
+            player.postionXF -= playerMove.horizon;
+            break;
+    }
     }
 }
 
@@ -211,7 +298,7 @@ function HH() {
 function moveEnemy(rowL, rowR) {
     // console.log(firstRowRight.leftX);
     if (enimies.postionX + enimiesMove.postionX > rowR || enimies.postionX + enimiesMove.postionX < rowL) {
-        enimiesMove.postionX =- enimiesMove.postionX;
+        enimiesMove.postionX = -enimiesMove.postionX;
     };
     enimies.postionX += enimiesMove.postionX;
 
@@ -314,6 +401,7 @@ function drawEverything() {
     // colorCircle(cloud.centerX + 50, cloud.centerY + 20,cloud.radius,cloud.drawColor);
     //These draw the images that are loaded on lines 13-19 there height an width will be static for now subject to change
     canvasContext.drawImage(playerSim, player.postionX - 50, player.postionY, player.height, player.width);
+    canvasContext.drawImage(playerFlip, player.postionXF - 50, player.postionYF, player.heightF, player.widthF);
     canvasContext.drawImage(coin, coinPosition.X, coinPosition.Y, 50, 35);
     canvasContext.drawImage(enemy, enimies.postionX - 50, enimies.postionY, 100, 75);
 
@@ -501,11 +589,11 @@ function level3() {
     player.postionX = 630;
     player.postionY = 525;
     enimies.postionX = 600;
-     enimies = {
+    enimies = {
         postionX: 90,
         postionY: 175
     };
-   // respawn may change
+    // respawn may change
     enimiesMove.respawn = 90;
     firstRowLeft.width = 565;
     firstRowRight.leftX = 700;
@@ -526,8 +614,12 @@ function level3() {
 }
 
 function level4() {
-    player.postionX = 1170;
-    player.postionY = 525;
+    player.postionXF = 0;
+    player.postionYF = 100;
+    player.height = 75;
+    player.width = 50;
+    player.postionX = 0;
+    player.postionY = -100;
     level = 4;
     PlayerPostion(); //this function will be updated to show score and tokens and time
     enimies = {
@@ -556,9 +648,9 @@ function change() {
     } else if (level === 2 && player.postionX === flag.leftX && player.postionY === flag.topY + 25) {
         setTimeout(level3, 1);
     } else if (level === 3 && player.postionX > 854 && player.postionY === 0) {
-            setTimeout(level4, 1);
-        }
+        setTimeout(level4, 1);
     }
+}
 //     } else if (level === 4 && player.postionX > 854 && player.postionY === 0) {
 //         console.log(brickChange); {
 //             setTimeout(level4, 1);
