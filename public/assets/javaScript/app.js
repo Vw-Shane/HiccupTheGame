@@ -211,7 +211,7 @@ function HH() {
 function moveEnemy(rowL, rowR) {
     // console.log(firstRowRight.leftX);
     if (enimies.postionX + enimiesMove.postionX > rowR || enimies.postionX + enimiesMove.postionX < rowL) {
-        enimiesMove.postionX = -enimiesMove.postionX;
+        enimiesMove.postionX =- enimiesMove.postionX;
     };
     enimies.postionX += enimiesMove.postionX;
 
@@ -342,7 +342,7 @@ function gravity() {
     }
 
     function gravity2ndRow() {
-        if (level < 3) {
+        if (level != 3) {
             if (player.postionY < 176) {
                 player.postionY = 350;
                 console.log("Char Should fall dwm");
@@ -500,17 +500,17 @@ function level3() {
     level = 3;
     player.postionX = 630;
     player.postionY = 525;
-    enimies = {
-        postionX: 900,
-        postionY: 350
-    }; // respawn may change
-    enimiesMove.respawn = 500;
+    enimies.postionX = 600;
+     enimies = {
+        postionX: 90,
+        postionY: 175
+    };
+   // respawn may change
+    enimiesMove.respawn = 90;
     firstRowLeft.width = 565;
-
     firstRowRight.leftX = 700;
     firstRowRight.width = 325;
     canvasBackground = "#A7ACAC";
-
     secondRowleft.leftX = 0;
     secondRowleft.width = 300;
     secondRowleft.drawColor = "black";
@@ -523,7 +523,6 @@ function level3() {
     thirdRow.drawColor = "blue";
     flag.leftX = thirdRow.leftX + thirdRow.width / 2;
     flag.topY = 0;
-
 }
 
 function level4() {
