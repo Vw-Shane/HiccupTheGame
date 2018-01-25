@@ -1,7 +1,8 @@
  canvas {
+ 	padding-left:3%;
  	float: left;
-    background: green;
-    width:80%;
+    
+    width:95%;
     height: 100%;
 }
 
