@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <meta charset="utf-8">
+    <title> Hiccup the game </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/game.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.0/moment.min.js" type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/javaScript/app2.js"></script>
+    <link rel="shortcut icon" type="image/png" href=" tab icon here ">
+    <link href="https://fonts.googleapis.com/css?family=Prosto+One" rel="stylesheet">
+    <!-- Did nothing <meta name="apple-mobile-web-app-capable" content="yes" /> -->
+</head>
+
+<body>
+    <div class="container-fluid" id="gameContainer">
+        <div class="container" id="lvl">
+            <!-- I want this to not use append but Oh well -->
+        </div>
+        <canvas id="myCanvas" width="1200" height="600"></canvas>
+        <div class="container" id="statsHere">
+            <!-- I want this to not use append but Oh well -->
+        </div>
+        <div class="container" id="return">
+            <div class="row">
+                <div class="col s6">
+                    <h6 onclick="location.href='/levels'">Return to Levels</h6>
+                </div>
+                <div class="col s6">
+                    <h6 onclick="location.href='/extra'">Buy Some Power Ups</h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    function Level() {
+        var txt;
+        if (confirm("Continue Game?") === true) {
+            window.location.href = "/login";
+        } else {
+            window.location.href = "/game";
+        }
+    }
+
+    function powerUp() {
+        var txt;
+        if (confirm("Continue Game?") === true) {
+            window.location.href = "/login";
+        } else {
+            window.location.href = "/game";
+        }
+    }
+    </script>
+</body>
+
+</html>

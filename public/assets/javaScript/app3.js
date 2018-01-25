@@ -26,9 +26,6 @@ var playerMove = {
     verticalF: 90
 
 };
-var flagFF = {
-    leftX : -1000, 
-    topY :-1000};
 
 var heartpostion = {
     X: 40,
@@ -103,9 +100,7 @@ var thirdRow = {
 var flag = {
     leftX: 1185,
     topY: 150,
-    leftXG: 1185,
-    topYG: 150,
-    width: 50,
+    width: 10,
     height: 100,
     drawColor: "yellow"
 };
@@ -132,8 +127,6 @@ var enemyFip = new Image();
 var coin = new Image();
 var hearts = new Image();
 var fireBall = new Image();
-var flagg = new Image();
-var flagF = new Image();
 
 // Set the image source and start loading
 playerFlip.src = '../assets/pics/KirraClipartFlip.png'
@@ -143,8 +136,6 @@ enemyFip.src = '../assets/pics/lobsterFlip.png';
 coin.src = '../assets/pics/coin.png';
 hearts.src = '../assets/pics/heart8Bit.png';
 fireBall.src = '../assets/pics/fireball.png';
-flagg.src = '../assets/pics/flag.png';
-flagF.src = '../assets/pics/flagflip.png';
 // hearts.src'../assets/pics/heart8Bit.png';
 
 
@@ -218,7 +209,10 @@ function movePlayer(evt) {
                 // player.postionY -= 10;
                 setTimeout(HH, 100);
                 break;
-            
+            case 84:
+                level4();
+
+                break;
             case 87:
                 /* Up arrow was pressed */
                 console.log("up");
@@ -345,28 +339,11 @@ function firem() {
     }
     if (fireBall.Y === enimies.postionY && fireBall.X === enimies.postionX + 1 || fireBall.Y === enimies.postionY && fireBall.X === enimies.postionX - 4) {
         fireBall.X = 2000;
-        
+
         enimies.postionX = 2000;
         setTimeout(resetEnemy, 3000);
         //call reset enemy funk ,30000
 
-    }
-    if (level === 4) {
-        if (fireBall.X < 1200) {
-        fireBall.X += 5;
-        // console.log(fireBall.X);
-    } else {
-        fireBall.X = 2000;
-        // console.log("Doop")
-    }
-    if (fireBall.X === enimies.postionX + 1 || fireBall.X === enimies.postionX - 4) {
-        fireBall.X = 2000;
-        
-        enimies.postionX = 2000;
-        setTimeout(resetEnemy, 3000);
-        //call reset enemy funk ,30000
-
-    }
     }
 }
 
@@ -409,7 +386,8 @@ function drawEverything() {
     //the following is the drawing of everything on screen
     colorRect(0, 0, canvas.width, canvas.height, canvasBackground, "Main");
 
-    colorRect(flag.leftX, flag.topY, flag.width, flag.height);
+    colorRect(flag.leftX, flag.topY, flag.width, flag.height,
+        flag.drawColor, "I ama flag I represent where to win");
 
     colorRect(firstRowLeft.leftX, firstRowLeft.topY, firstRowLeft.width, firstRowLeft.height, firstRowLeft.drawColor, "I am half of firstRow");
 
@@ -431,10 +409,7 @@ function drawEverything() {
     // colorCircle(cloud.centerX + 80, cloud.centerY,cloud.radius,cloud.drawColor);
     // colorCircle(cloud.centerX + 80, cloud.centerY + 20,cloud.radius + 10,cloud.drawColor);
     // colorCircle(cloud.centerX + 50, cloud.centerY + 20,cloud.radius,cloud.drawColor);
-    //These draw the images that are loaded on lines 13-19 there height an width will be static for now subject to change flag.height, 
-    canvasContext.drawImage(flagg,flag.leftXG - 50, flag.topYG,flag.width,flag.height);
-    canvasContext.drawImage(flagF,flagFF.leftX, flagFF.topY,flag.width,flag.height);
-
+    //These draw the images that are loaded on lines 13-19 there height an width will be static for now subject to change
     canvasContext.drawImage(playerSim, player.postionX - 50, player.postionY, player.height, player.width);
     canvasContext.drawImage(playerFlip, player.postionXF - 50, player.postionYF, player.heightF, player.widthF);
     canvasContext.drawImage(coin, coinPosition.X, coinPosition.Y, 50, 35);
@@ -497,18 +472,9 @@ function gravity() {
                 console.log("Char Should fall dwm");
                 console.log("up,dwn" + player.postionY, "left right" + player.postionX);
             } else { clearTimeout(); }
-           
         };
 
     };
-    if (level === 3 ) {
-         if (player.postionX > gap.left && player.postionX < gap.right && player.postionY === 350 || player.postionX > gap.left2 && player.postionX < gap.right2 && player.postionY === 350) {
-        if (0===0) {
-
-            setTimeout(gravity1stRow, 100);
-        }
-    };
-    }
 
     if (player.postionX > gap.left && player.postionX < gap.right || player.postionX > gap.left2 && player.postionX < gap.right2) {
         if (player.postionY > 250 && player.postionY < 351) {
@@ -541,7 +507,7 @@ function gravity() {
 // }
 //I am here for testing purposes 
 function PlayerPostion() {
-    $("#statsHere").html(`Coin Stats ${coinPosition.X} Level ${level}Player's X ${player.postionX}--- Player's Y ${player.postionY} _-_--__ Enimies X ${enimies.postionX} -___--_ Enimies Y ${enemyFlip.postionY}  `);
+    $("#statsHere").html(`Coin Stats ${coinPosition.X} Level ${level}Player's X ${player.postionXF}--- Player's Y ${player.postionYF} _-_--__ Enimies X ${enimies.postionX} -___--_ Enimies Y ${enemyFlip.postionY}  `);
     // $("#statsHere").html(`Tokens: 23 &nbsp;&nbsp; Elapsed Time 1:10`);
 }
 
@@ -585,30 +551,33 @@ function whatLvlIsThis() {
 //     };
 // }
 // This will be called if enimy and player meet
+  level3();
 function refreshPage() {
+    level =1;
     window.location.reload();
 }
+
 
 function lose() {
     if (level === 4) {
         if (health === 2) {
-        if (player.postionYF === enemyFlip.postionY && player.postionXF === enimies.postionX - 15) {
-            heartpostion.Y2 = -100;
-            health = 1;
-        }
-    } else if (health === 1) {
-        if (player.postionYF === enemyFlip.postionY && player.postionXF === enimies.postionX - 15) {
+            if (player.postionYF === enemyFlip.postionY && player.postionXF === enimies.postionX - 15) {
+                heartpostion.Y2 = -100;
+                health = 1;
+            }
+        } else if (health === 1) {
+            if (player.postionYF === enemyFlip.postionY && player.postionXF === enimies.postionX - 15) {
 
-            heartpostion.Y = -100;
-            health = 0;
-        }
+                heartpostion.Y = -100;
+                health = 0;
+            }
 
-    } else if (health === 0) {
-        if (player.postionYF === enemyFlip.postionY && player.postionXF === enimies.postionX - 15) {
-            health = -1;
-            refreshPage();
+        } else if (health === 0) {
+            if (player.postionYF === enemyFlip.postionY && player.postionXF === enimies.postionX - 15) {
+                health = -1;
+                refreshPage();
+            }
         }
-    }
     }
     if (health === 2) {
         if (player.postionY === enimies.postionY && player.postionX === enimies.postionX - 15) {
@@ -648,7 +617,7 @@ function level2() {
     player.postionX = 1170;
     player.postionY = 525;
     level = 2;
-     //this function will be updated to show score and tokens and time
+    PlayerPostion(); //this function will be updated to show score and tokens and time
     enimies = {
         postionX: 90,
         postionY: 175
@@ -666,8 +635,6 @@ function level2() {
     secondRowleft.width = 900;
     flag.leftX = 105;
     flag.topY = 150;
-    flag.leftXG = flag.leftX;
-     flag.topYG = flag.topY;
 }
 
 function level3() {
@@ -679,10 +646,6 @@ function level3() {
         postionX: 90,
         postionY: 175
     };
-   gap.left = 560;
-    gap.right = 704;
-    gap.left2 = 1021,
-        gap.right2 = 1201,
     // respawn may change
     enimiesMove.respawn = 90;
     firstRowLeft.width = 565;
@@ -701,32 +664,32 @@ function level3() {
     thirdRow.drawColor = "blue";
     flag.leftX = thirdRow.leftX + thirdRow.width / 2;
     flag.topY = 0;
-    flag.leftXG = flag.leftX;
-     flag.topYG = flag.topY;
 }
 
 function level4() {
-    player.height = 0;
-    player.width = 0;
     player.postionXF = 0;
     player.postionYF = 0;
-    
+    player.height = 75;
+    player.width = 50;
     player.postionX = 0;
-    player.postionY = 2200;
+    player.postionY = -100;
     level = 4;
     enimies = {
         postionX: 90,
     };
-  enemyFlip = {
-    H: 200,
-    W: 175,
-    postionY: 175
-};
+    enemyFlip = {
+        H: 200,
+        W: 175,
+        postionY: 175
+    };
     secondRowleft.topY2 = 1450;
     thirdRow.leftX = -1000;
     enimiesMove.respawn = 500;
     firstRowLeft.width = 745;
-    
+    gap.left = 740;
+    gap.right = 880;
+    gap.left2 = 1109,
+        gap.right2 = 1201,
         firstRowRight.leftX = 685;
     firstRowLeft.topY = 475;
     firstRowRight.width = 425;
@@ -735,13 +698,8 @@ function level4() {
     secondRowleft.leftX = 80;
     secondRowleft.topY = 125;
     secondRowleft.width = 900;
-    flag.leftXG = - 1000;
-     flag.topYG = - 1000;
-     flag.leftX = 105;
+    flag.leftX = 105;
     flag.topY = 500;
-   flagFF.leftX  = flag.leftX;
-     flagFF.topY = flag.topY;
-   
 }
 
 // This is sets up 2nd level I may put this in a seprate file 
@@ -750,7 +708,7 @@ function change() {
         setTimeout(level2, 1);
     } else if (level === 2 && player.postionX === flag.leftX && player.postionY === flag.topY + 25) {
         setTimeout(level3, 1);
-    } else if (level === 3 && player.postionX > 854 && player.postionY === 0|| player.postionX < 915 && player.postionY === 0) {
+    } else if (level === 3 && player.postionX > 854 && player.postionY === 0 || player.postionX < 915 && player.postionY === 0) {
         setTimeout(level4, 1);
     }
 }
@@ -769,12 +727,5 @@ function playerLoop() {
         player.postionX = 15;
     } else if (player.postionX < 0) {
         player.postionX = 1170;
-    }
-    if (level===4) {
-       if (player.postionXF > 1200) {
-        player.postionXF = 15;
-    } else if (player.postionXF < 0) {
-        player.postionXF = 1170;
-    } 
     }
 }

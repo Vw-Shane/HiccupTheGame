@@ -17,6 +17,15 @@ module.exports = function(app) {
 	app.get("/game", function(req, res){
 		res.sendFile(path.join(__dirname, "../otherPages/game.html"));
 	});
+	app.get("/game2", function(req, res){
+		res.sendFile(path.join(__dirname, "../otherPages/game2.html"));
+	});
+	app.get("/game3", function(req, res){
+		res.sendFile(path.join(__dirname, "../otherPages/game3.html"));
+	});
+	app.get("/game4", function(req, res){
+		res.sendFile(path.join(__dirname, "../otherPages/game4.html"));
+	});
 
 	app.get("/arena", function(req, res){
 		res.sendFile(path.join(__dirname, "../otherPages/arena.html"));
