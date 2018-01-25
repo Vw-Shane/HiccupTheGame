@@ -2,7 +2,9 @@ body{
 	background-color:#75FFFF; 	
 }
 /*#75FFFF this blue was to bright maybe use else where?*/
-
+canvas{
+	width: 100%;
+}
 #modal1{
 	 margin-top: 5%;
 	 border-radius: 10px;
