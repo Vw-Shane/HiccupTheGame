@@ -1,7 +1,8 @@
-var db = require("../models");
+var db = require("../models/");
 module.exports = {
 
 create: function(req, res) {
+	console.log(`Hey this worked ${JSON.stringify(req.body)}`);
     db.Player
       .create(req.body)
       .then(function(dbPlayer) {

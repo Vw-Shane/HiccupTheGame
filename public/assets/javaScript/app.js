@@ -123,7 +123,7 @@ var fireBall = new Image();
 // Set the image source and start loading
 playerFlip.src = '../assets/pics/KirraClipartFlip.png'
 playerSim.src = '../assets/pics/KirraClipart.png';
-enemy.src = '../assets/pics/Master_Shake.png';
+enemy.src = '../assets/pics/lobster.png';
 coin.src = '../assets/pics/coin.png';
 hearts.src = '../assets/pics/heart8Bit.png';
 fireBall.src = '../assets/pics/fireball.png';
@@ -572,126 +572,125 @@ function coinLogic(minX, maxX, multipleX, minY, maxY, multipleY) {
         coinPosition.X = Math.floor(Math.random() * ((maxX - minX) / multipleX)) * multipleX + minX;
         coinPosition.Y = Math.floor(Math.random() * ((maxY - minY) / multipleY)) * multipleY + minY;
         console.log(`Coin thing happend ${coinPosition.X}`);
-    } else if 
-        (player.postionYF === coinPosition.Y && player.postionXF === coinPosition.X) {
-            coinPosition.count++;
-            coinPosition.X = Math.floor(Math.random() * ((maxX - minX) / multipleX)) * multipleX + minX;
-            coinPosition.Y = Math.floor(Math.random() * ((maxY - minY) / multipleY)) * multipleY + minY;
-            console.log(`Coin thing happend ${coinPosition.X}`);
-        }
+    } else if (player.postionYF === coinPosition.Y && player.postionXF === coinPosition.X) {
+        coinPosition.count++;
+        coinPosition.X = Math.floor(Math.random() * ((maxX - minX) / multipleX)) * multipleX + minX;
+        coinPosition.Y = Math.floor(Math.random() * ((maxY - minY) / multipleY)) * multipleY + minY;
+        console.log(`Coin thing happend ${coinPosition.X}`);
     }
+}
 
-    function level2() {
-        player.postionX = 1170;
-        player.postionY = 525;
-        level = 2;
-        PlayerPostion(); //this function will be updated to show score and tokens and time
-        enimies = {
-            postionX: 90,
-            postionY: 175
-        };
-        enimiesMove.respawn = 500;
-        firstRowLeft.width = 745;
-        gap.left = 740;
-        gap.right = 880;
-        gap.left2 = 1109,
-            gap.right2 = 1201,
-            firstRowRight.leftX = 885;
-        firstRowRight.width = 225;
+function level2() {
+    player.postionX = 1170;
+    player.postionY = 525;
+    level = 2;
+    PlayerPostion(); //this function will be updated to show score and tokens and time
+    enimies = {
+        postionX: 90,
+        postionY: 175
+    };
+    enimiesMove.respawn = 500;
+    firstRowLeft.width = 745;
+    gap.left = 740;
+    gap.right = 880;
+    gap.left2 = 1109,
+        gap.right2 = 1201,
+        firstRowRight.leftX = 885;
+    firstRowRight.width = 225;
+    firstRowRight.drawColor = "black";
+    secondRowleft.leftX = 80;
+    secondRowleft.width = 900;
+    flag.leftX = 105;
+    flag.topY = 150;
+}
+
+function level3() {
+    level = 3;
+    player.postionX = 630;
+    player.postionY = 525;
+    enimies.postionX = 600;
+    enimies = {
+        postionX: 90,
+        postionY: 175
+    };
+    // respawn may change
+    enimiesMove.respawn = 90;
+    firstRowLeft.width = 565;
+    firstRowRight.leftX = 700;
+    firstRowRight.width = 325;
+    canvasBackground = "#A7ACAC";
+    secondRowleft.leftX = 0;
+    secondRowleft.width = 300;
+    secondRowleft.drawColor = "black";
+    secondRowleft.leftX2 = 450;
+    secondRowleft.width2 = 300;
+    thirdRow.leftX = 780;
+    thirdRow.topY = 75;
+    thirdRow.width = 200;
+    thirdRow.height = 25;
+    thirdRow.drawColor = "blue";
+    flag.leftX = thirdRow.leftX + thirdRow.width / 2;
+    flag.topY = 0;
+}
+
+function level4() {
+    player.postionXF = 0;
+    player.postionYF = 0;
+    player.height = 75;
+    player.width = 50;
+    player.postionX = 0;
+    player.postionY = -100;
+
+    level = 4;
+    PlayerPostion(); //this function will be updated to show score and tokens and time
+    enimies = {
+        postionX: 90,
+        postionY: 225
+    };
+    secondRowleft.topY2 = 1450;
+    thirdRow.leftX = -1000;
+    enimiesMove.respawn = 500;
+    firstRowLeft.width = 745;
+    gap.left = 740;
+    gap.right = 880;
+    gap.left2 = 1109,
+        gap.right2 = 1201,
+        firstRowRight.leftX = 885;
+    firstRowLeft.topY = 475;
+    firstRowRight.width = 225;
+    firstRowRight.topY = 300,
         firstRowRight.drawColor = "black";
-        secondRowleft.leftX = 80;
-        secondRowleft.width = 900;
-        flag.leftX = 105;
-        flag.topY = 150;
+    secondRowleft.leftX = 80;
+    secondRowleft.topY = 125;
+    secondRowleft.width = 900;
+    flag.leftX = 105;
+    flag.topY = 500;
+}
+
+// This is sets up 2nd level I may put this in a seprate file 
+function change() {
+    if (level === 1 && player.postionX === flag.leftX && player.postionY === flag.topY + 25) {
+        setTimeout(level2, 1);
+    } else if (level === 2 && player.postionX === flag.leftX && player.postionY === flag.topY + 25) {
+        setTimeout(level3, 1);
+    } else if (level === 3 && player.postionX === flag.leftX && player.postionY === 0) {
+        setTimeout(level4, 1);
     }
+}
+//     } else if (level === 4 && player.postionX > 854 && player.postionY === 0) {
+//         console.log(brickChange); {
+//             setTimeout(level4, 1);
 
-    function level3() {
-        level = 3;
-        player.postionX = 630;
-        player.postionY = 525;
-        enimies.postionX = 600;
-        enimies = {
-            postionX: 90,
-            postionY: 175
-        };
-        // respawn may change
-        enimiesMove.respawn = 90;
-        firstRowLeft.width = 565;
-        firstRowRight.leftX = 700;
-        firstRowRight.width = 325;
-        canvasBackground = "#A7ACAC";
-        secondRowleft.leftX = 0;
-        secondRowleft.width = 300;
-        secondRowleft.drawColor = "black";
-        secondRowleft.leftX2 = 450;
-        secondRowleft.width2 = 300;
-        thirdRow.leftX = 780;
-        thirdRow.topY = 75;
-        thirdRow.width = 200;
-        thirdRow.height = 25;
-        thirdRow.drawColor = "blue";
-        flag.leftX = thirdRow.leftX + thirdRow.width / 2;
-        flag.topY = 0;
+//         }
+//     }
+
+// }
+
+
+function playerLoop() {
+    if (player.postionX > 1200) {
+        player.postionX = 15;
+    } else if (player.postionX < 0) {
+        player.postionX = 1170;
     }
-
-    function level4() {
-        player.postionXF = 0;
-        player.postionYF = 0;
-        player.height = 75;
-        player.width = 50;
-        player.postionX = 0;
-        player.postionY = -100;
-
-        level = 4;
-        PlayerPostion(); //this function will be updated to show score and tokens and time
-        enimies = {
-            postionX: 90,
-            postionY: 225
-        };
-        secondRowleft.topY2 = 1450;
-        thirdRow.leftX = -1000;
-        enimiesMove.respawn = 500;
-        firstRowLeft.width = 745;
-        gap.left = 740;
-        gap.right = 880;
-        gap.left2 = 1109,
-            gap.right2 = 1201,
-            firstRowRight.leftX = 885;
-        firstRowLeft.topY = 475;
-        firstRowRight.width = 225;
-        firstRowRight.topY = 300,
-            firstRowRight.drawColor = "black";
-        secondRowleft.leftX = 80;
-        secondRowleft.topY = 125;
-        secondRowleft.width = 900;
-        flag.leftX = 105;
-        flag.topY = 500;
-    }
-
-    // This is sets up 2nd level I may put this in a seprate file 
-    function change() {
-        if (level === 1 && player.postionX === flag.leftX && player.postionY === flag.topY + 25) {
-            setTimeout(level2, 1);
-        } else if (level === 2 && player.postionX === flag.leftX && player.postionY === flag.topY + 25) {
-            setTimeout(level3, 1);
-        } else if (level === 3 && player.postionX > 854 && player.postionY === 0) {
-            setTimeout(level4, 1);
-        }
-    }
-    //     } else if (level === 4 && player.postionX > 854 && player.postionY === 0) {
-    //         console.log(brickChange); {
-    //             setTimeout(level4, 1);
-
-    //         }
-    //     }
-
-    // }
-
-
-    function playerLoop() {
-        if (player.postionX > 1200) {
-            player.postionX = 15;
-        } else if (player.postionX < 0) {
-            player.postionX = 1170;
-        }
-    }
+}
