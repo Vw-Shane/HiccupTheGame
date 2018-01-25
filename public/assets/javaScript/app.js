@@ -42,6 +42,13 @@ var enimies = {
     postionY: 525
 };
 
+
+var enemyFlip = {
+    H: 0,
+    W: 0,
+    postionY: 475
+};
+
 var enimiesMove = {
     postionX: 5,
     faster: 10,
@@ -116,6 +123,7 @@ var keysDown = {};
 var playerSim = new Image();
 var playerFlip = new Image();
 var enemy = new Image();
+var enemyFip = new Image();
 var coin = new Image();
 var hearts = new Image();
 var fireBall = new Image();
@@ -124,6 +132,7 @@ var fireBall = new Image();
 playerFlip.src = '../assets/pics/KirraClipartFlip.png'
 playerSim.src = '../assets/pics/KirraClipart.png';
 enemy.src = '../assets/pics/lobster.png';
+enemyFip.src = '../assets/pics/lobsterFlip.png';
 coin.src = '../assets/pics/coin.png';
 hearts.src = '../assets/pics/heart8Bit.png';
 fireBall.src = '../assets/pics/fireball.png';
@@ -330,7 +339,7 @@ function firem() {
     }
     if (fireBall.Y === enimies.postionY && fireBall.X === enimies.postionX + 1 || fireBall.Y === enimies.postionY && fireBall.X === enimies.postionX - 4) {
         fireBall.X = 2000;
-        console.log("Shits Gone");
+        
         enimies.postionX = 2000;
         setTimeout(resetEnemy, 3000);
         //call reset enemy funk ,30000
@@ -405,6 +414,7 @@ function drawEverything() {
     canvasContext.drawImage(playerFlip, player.postionXF - 50, player.postionYF, player.heightF, player.widthF);
     canvasContext.drawImage(coin, coinPosition.X, coinPosition.Y, 50, 35);
     canvasContext.drawImage(enemy, enimies.postionX - 50, enimies.postionY, 100, 75);
+    canvasContext.drawImage(enemyFip, enimies.postionX - 50, enemyFlip.postionY, enemyFlip.H, enemyFlip.W);
 
 
     // for (var i = 0; i < hearts.length; i++) {
@@ -425,7 +435,7 @@ function gravity() {
                 player.postionYF = 0;
             }
         } else if (player.postionYF === 350) {
-            if (player.postionXF < 885 || player.postionXF > 1111) {
+            if (player.postionXF < 704 || player.postionXF > 1111) {
                 player.postionYF = 175;
             }
         } else if (player.postionYF === 525) {
@@ -497,7 +507,7 @@ function gravity() {
 // }
 //I am here for testing purposes 
 function PlayerPostion() {
-    $("#statsHere").html(`Coin Stats ${coinPosition.X} Level ${level}Player's X ${player.postionXF}--- Player's Y ${player.postionYF} _-_--__ Enimies X ${enimies.postionX} -___--_ Enimies Y ${enimies.postionY}  `);
+    $("#statsHere").html(`Coin Stats ${coinPosition.X} Level ${level}Player's X ${player.postionXF}--- Player's Y ${player.postionYF} _-_--__ Enimies X ${enimies.postionX} -___--_ Enimies Y ${enemyFlip.postionY}  `);
     // $("#statsHere").html(`Tokens: 23 &nbsp;&nbsp; Elapsed Time 1:10`);
 }
 
@@ -546,6 +556,26 @@ function refreshPage() {
 }
 
 function lose() {
+    if (level === 4) {
+        if (health === 2) {
+        if (player.postionYF === enemyFlip.postionY && player.postionXF === enimies.postionX - 15) {
+            heartpostion.Y2 = -100;
+            health = 1;
+        }
+    } else if (health === 1) {
+        if (player.postionYF === enemyFlip.postionY && player.postionXF === enimies.postionX - 15) {
+
+            heartpostion.Y = -100;
+            health = 0;
+        }
+
+    } else if (health === 0) {
+        if (player.postionYF === enemyFlip.postionY && player.postionXF === enimies.postionX - 15) {
+            health = -1;
+            refreshPage();
+        }
+    }
+    }
     if (health === 2) {
         if (player.postionY === enimies.postionY && player.postionX === enimies.postionX - 15) {
             heartpostion.Y2 = -100;
@@ -640,13 +670,15 @@ function level4() {
     player.width = 50;
     player.postionX = 0;
     player.postionY = -100;
-
     level = 4;
-    PlayerPostion(); //this function will be updated to show score and tokens and time
     enimies = {
         postionX: 90,
-        postionY: 225
     };
+  enemyFlip = {
+    H: 200,
+    W: 175,
+    postionY: 175
+};
     secondRowleft.topY2 = 1450;
     thirdRow.leftX = -1000;
     enimiesMove.respawn = 500;
@@ -655,9 +687,9 @@ function level4() {
     gap.right = 880;
     gap.left2 = 1109,
         gap.right2 = 1201,
-        firstRowRight.leftX = 885;
+        firstRowRight.leftX = 685;
     firstRowLeft.topY = 475;
-    firstRowRight.width = 225;
+    firstRowRight.width = 425;
     firstRowRight.topY = 300,
         firstRowRight.drawColor = "black";
     secondRowleft.leftX = 80;
@@ -673,7 +705,7 @@ function change() {
         setTimeout(level2, 1);
     } else if (level === 2 && player.postionX === flag.leftX && player.postionY === flag.topY + 25) {
         setTimeout(level3, 1);
-    } else if (level === 3 && player.postionX === flag.leftX && player.postionY === 0) {
+    } else if (level === 3 && player.postionX > 854 && player.postionY === 0|| player.postionX < 915 && player.postionY === 0) {
         setTimeout(level4, 1);
     }
 }
