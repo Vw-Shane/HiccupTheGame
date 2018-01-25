@@ -270,8 +270,8 @@ function movePlayer(evt) {
                 fireBall.X = player.postionXF + 1;
                 /* spacebar was pressed */
                 // console.log("look here"+fireBall.Y);
-                player.height += 10;
-                player.width += 10;
+                player.heightF += 10;
+                player.widthF += 10;
                 attack = 100;
 
 
@@ -309,6 +309,8 @@ function HH() {
     // this makes the player "hiccup" out a fireball
     player.height -= 10;
     player.width -= 10;
+    player.heightF -= 10;
+    player.widthF -= 10;
 }
 //all you need now is the function with the inputs 
 function moveEnemy(rowL, rowR) {
