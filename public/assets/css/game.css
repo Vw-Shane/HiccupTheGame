@@ -1,8 +1,13 @@
- canvas {
- 	padding-left:3%;
+#gameContainer{
+	padding-left:5%;
  	float: left;
+ 	width: 95%;
+} 
+
+ canvas {
+ 	
     
-    width:95%;
+    width:100%;
     height: 100%;
 }
 
