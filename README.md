@@ -1,4 +1,34 @@
-# tennisgame
+Hiccup the game is fun html5 canvas and javascript based game where the goal is to collect coins and get to the end of the level with out getting attacked by the lobster.
+
+Coins generate endlessly and randomly on every level, you move your character by pressing left right up arrow keys or a,w,d. If your character isn’t standing on a block it will fall down. Using the space you shoot fireballs via a hiccup action at the lobster. Be careful though the lobster comes back after 3 seconds and you can only shoot one fireball at a time.
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	Errors and comments 
 	 lines 13-19 are the current way images get loaded so they can be drawn later
